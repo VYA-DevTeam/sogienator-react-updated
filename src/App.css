@@ -1,0 +1,40 @@
+.home,
+.test,
+.result
+{
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background-color: #FFF2F8;
+  color: #54424B;
+  overflow-x: hidden;
+}
+
+.test {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: 100px;
+}
+
+.result {
+  /* background-image: url('./images/Wow.png'); */
+  display: flex;
+  flex-direction: column;
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  font-size: 30px;
+}
+
+.form-container{
+  /* padding-top: 100px !important; */
+  border-color: #C3126B;
+  margin: 10px;
+  padding-left: 5% !important;
+  padding-right: 5% !important;
+  padding-bottom: 1%;
+}

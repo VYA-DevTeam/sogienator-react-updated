@@ -1,0 +1,40 @@
+.name{
+    color: #54424B;
+    width: 100%;
+    /* margin-left: -107px; */
+    /* filter: drop-shadow(8px 3px 6px gray); */
+    font-weight: 600;
+    font-size: 50px;
+    text-shadow: rgb(219, 173, 173) 6px 2px 4px;
+    /* margin-top: 10px; */
+}
+.name--organization{
+    color: #CA9FB4;
+    width: 65%;
+    margin-left: 0;
+    /* filter: drop-shadow(8px 3px 6px rgb(243, 210, 210)); */
+    font-weight: 800;
+    font-size: 60px;
+    margin: 5px 0 20px 0;
+    width: 100%;
+}
+.logo{
+    z-index: 1000;
+}
+
+
+@media screen and (max-width: 820px) {
+
+}
+
+@media screen and (max-width: 768px) {
+.name{
+    font-size: 25px;
+        margin-left: -107px;
+
+}
+.name--organization{
+    font-size: 25px;
+}
+    
+}

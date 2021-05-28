@@ -1,0 +1,123 @@
+.btn {
+  /* padding: 8px 20px; */
+  /* border-radius: 2px; */
+  outline: none;
+  cursor: pointer;
+  font-size: 28px;
+  font-family: "Roboto", sans-serif;
+  width: 284px;
+  height: 88px;
+  border-radius: 10px;
+  border: none;
+  color: white !important;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.btn--home {
+  /* background: linear-gradient(
+      90deg,
+      rgb(66, 56, 100) 0%,
+      rgb(92, 55, 55) 100%
+    ); */
+  /* border-radius: 10px; */
+  background: linear-gradient(to top, #a890fe, #ea8d8d);
+  font-size: 50px;
+  transition: al 0.3s ease-out;
+  color: white;
+}
+
+.btn--submit {
+  color: #393267;
+  font-size: 28px;
+  border: 1px solid #393267;
+}
+
+.btn--next {
+  font-weight: 600px;
+  background-color: #c3126b;
+  border-radius: 20px;
+}
+.btn--tooltip {
+  font-weight: 600px;
+  background-color: white;
+  color: black !important;
+  border-radius: 100%;
+}
+.btn--medium {
+  /* padding: 8px 20px; */
+  font-size: 20px;
+  padding: 20px;
+  width: 254px;
+  height: 70px;
+}
+
+.btn--small {
+  /* padding: 8px 20px; */
+  font-size: 20px;
+  /* padding: 10px; */
+  width: 137px;
+  height: 55px;
+}
+
+.btn--esmall {
+  /* padding: 8px 20px; */
+  font-size: 11px;
+  padding: 5px;
+  width: 27px;
+  height: 27px;
+  color: black;
+}
+
+.btn--large {
+  /* padding: 12px 26px; */
+  font-size: 25px;
+  font-weight: 800;
+  padding: 10px;
+}
+
+.btn--medium:hover,
+.btn--large:hover {
+  /* background: palevioletred; */
+  /* color: gray; */
+  transition: 250ms;
+}
+
+.btn--home::after {
+  content: "";
+  position: relative;
+  left: -60%;
+  top: -65%;
+  width: 60%;
+  height: 89%;
+  transform: rotate(52deg);
+  background-color: rgba(255, 242, 248, 0.2);
+  transition: all 0.5s;
+  display: block;
+
+  /* content: "";
+  position: absolute;
+  left: 33%;
+  top: 23%;
+  width: 10%;
+  height: 7%;
+  transform: rotate(44deg);
+  transition: all 2s; */
+}
+
+.btn--home:hover:after {
+  left: 110%;
+  opacity: 1;
+}
+/* .btn--tooltip:hover{
+
+} */
+@media screen and (max-width: 768px) {
+  .btn--medium{
+    font-size: 15px !important;
+  /* padding: 10px; */
+  width: 154px;
+  height: 40px;
+  padding-top: 10px;
+  }
+}
