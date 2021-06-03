@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "./Button";
+import { LinkButton } from "./LinkButton";
 import { bounceInLeft, bounceInUp, fadeInUp } from "react-animations";
 import styled, { keyframes } from "styled-components";
 import { useSpring, animated } from "react-spring";
@@ -20,7 +20,10 @@ const FadeInUpDiv = styled.div`
   animation: 1s ${fadeInUpAnimation};
 `;
 
+
+
 function StartPage() {
+
   return (
     <div className="container-fluid">
       {/* <div className="intro">
@@ -33,7 +36,7 @@ function StartPage() {
             src="/images/header-footer/logoVYA.png"
             className="img-fluid"
             alt="logo"
-            // style={{ "max-width": "70px" }}
+          // style={{ "max-width": "70px" }}
           />
         </div>
         <div
@@ -50,11 +53,12 @@ function StartPage() {
         <Delay wait={2000}>
           <FadeInUpDiv>
             {/* <div className = "d-flex flex-column"> */}
-            <Button
+            <LinkButton
+              path={"/quiz"}
               buttonSize="btn--large"
               buttonType="btn--home"
               className="btn-start"
-              //   className="btn-animation"
+            //   className="btn-animation"
             >
               <div className="pt-3 justify-content-center text-center">
                 GET STARTED
@@ -63,7 +67,7 @@ function StartPage() {
                 style={{ transform: y.interpolate((v) => `translateY(${v}%`) }}
                 className="glance"
               /> */}
-            </Button>
+            </LinkButton>
             <img
               src="/images/M1.gif"
               className="img-fluid px-3 mx-auto d-block"
@@ -71,12 +75,12 @@ function StartPage() {
               style={{ width: "500px" }}
             />
             <div className="btn--control">
-              <Button
+              <LinkButton
                 // className="home-btn"
                 buttonSize="btn--medium"
                 buttonStyle="btn--home"
                 className="btn-ref pt-3"
-                //   className="btn-animation"
+              //   className="btn-animation"
               >
                 <div className="justify-content-center text-center">
                   <a
@@ -87,7 +91,7 @@ function StartPage() {
                     Tìm hiểu thêm
                   </a>
                 </div>
-              </Button>
+              </LinkButton>
               {/* </div> */}
             </div>
           </FadeInUpDiv>

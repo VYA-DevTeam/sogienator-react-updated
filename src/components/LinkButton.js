@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 const SIZES = ["btn--medium", "btn--large", "btn--small", "btn--esmall"];
 const STYLES = ["btn--home", "btn--submit", "btn--next", "btn--tooltip"];
 
-export const Button = ({
+export const LinkButton = ({
   children,
   type,
   onClick,
   buttonSize,
   buttonStyle,
+  path
 }) => {
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES["btn-large"];
   const checkButtonStyle = STYLES.includes(buttonStyle)
@@ -18,7 +19,7 @@ export const Button = ({
     : STYLES[0];
 
   return (
-    <Link to="/quiz" className="btn-start">
+    <Link to={path} className="btn-start">
       <button
         className={`btn ${checkButtonSize} ${checkButtonStyle} `}
         onClick={onClick}
@@ -30,4 +31,4 @@ export const Button = ({
   );
 };
 
-export default Button;
+export default LinkButton;

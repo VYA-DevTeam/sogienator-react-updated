@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import LinkButton from "./LinkButton";
 import "./FormResult.css";
 
 function FormResult() {
@@ -28,7 +28,7 @@ function FormResult() {
               <div className="list-feedback p-3">
                 <div className="p-2 bd-highlight list-feedback-item ">
                   <div class="pr-3">Khong chinh xac</div>
-                  <Button
+                  <LinkButton
                     buttonSize="btn--esmall"
                     buttonStyle="btn--tooltip"
                     data-toggle="tooltip"
@@ -36,7 +36,7 @@ function FormResult() {
                     title="Tooltip on right"
                   >
                     ?
-                  </Button>
+                  </LinkButton>
                 </div>
                 <div className=" p-2 bd-highlight list-feedback-item ">
                   Gan Chinh xac

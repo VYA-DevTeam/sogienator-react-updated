@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import LinkButton from "./LinkButton";
 import "./testForm.css";
 import "./../App.css";
 
@@ -30,9 +30,9 @@ function TestForm() {
             </div>
           </div>
           <div className = "test-btn">
-          <Button buttonSize="btn--small" buttonStyle="btn--next">
+          <LinkButton buttonSize="btn--small" buttonStyle="btn--next">
             Next
-          </Button>
+          </LinkButton>
           </div>
         </div>
       </div>
@@ -82,9 +82,9 @@ function TestForm() {
           
           </div>
           <div className = "test-btn-mobile">
-          <Button buttonSize="btn--small" buttonStyle="btn--next">
+          <LinkButton buttonSize="btn--small" buttonStyle="btn--next">
             Next
-          </Button>
+          </LinkButton>
         </div>
       </div>
     </div>
