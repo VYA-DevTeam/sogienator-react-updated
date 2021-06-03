@@ -17,10 +17,10 @@ export default function QuizForm() {
         }
     }
 
-    useEffect(() => {
-        if (question.choices)
-            console.log(question.choices);
-    }, [question])
+    // useEffect(() => {
+    //     if (question.choices)
+    //         console.log(question.choices);
+    // }, [question])
 
     return (
         <div>
