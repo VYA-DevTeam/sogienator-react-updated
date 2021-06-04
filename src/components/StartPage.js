@@ -50,7 +50,7 @@ function StartPage() {
         <BounceInLeftDiv>
           <div className="name--organization">Vietnam Youth Alliance</div>
         </BounceInLeftDiv>
-        <Delay wait={2000}>
+        <Delay wait={0}>
           <FadeInUpDiv>
             {/* <div className = "d-flex flex-column"> */}
             <LinkButton
