@@ -138,6 +138,21 @@
     width: 30%;
     height: 150px;
 }
+.quiz-item-box .checked-click {
+    color: black;
+    border-radius: 20px;
+    color: #393267;
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    position: relative;
+    width: 30%;
+    height: 150px;
+    background-color: antiquewhite !important;
+}
 .quiz-item-box .quiz-item-box-child p{
     margin-bottom: 0px;
     font-size: 1.5rem;

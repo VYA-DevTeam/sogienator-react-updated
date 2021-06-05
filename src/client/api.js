@@ -6,7 +6,7 @@ class apiClient {
 
     async getQuestionByType(type) {
         const params = {
-            type: "general",
+            type,
         }
 
         const response = await axios.get(this.BASE_URL + "/questions", { params })

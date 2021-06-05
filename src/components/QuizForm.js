@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, {
+    useState,
+    useEffect
+} from "react";
 import { Container, Button } from 'react-bootstrap';
 import "./quizForm.css";
 import "./../App.css";
 import QuizItem from './QuizItem';
-import { getApiClient } from "../client/api";
-import Loading from './Loading';
-
-export default function QuizForm() {
-
-    const [question, setQuestion] = useState([]);
-
-    const handleFetchQuestion = async () => {
-        const response = await getApiClient().getQuestionByType("general");
-        if (response.status === 200) {
-            console.log(response.data)
-            setQuestion(response.data[0]);
-        }
-    }
-
-    // useEffect(() => {
-    //     if (question.choices)
-    //         console.log(question.choices);
-    // }, [question])
-
+export default function QuizForm({question,handleChooseQuestion,chooseQuestion}) {
+    const [chooseId,setChooseId] = useState(null);
     return (
         <div>
             <Container fluid>
-                {/* <Loading></Loading> */}
                 <div className="form-container">
                     <img
                         src="/images/explain-crop.png"
@@ -36,7 +20,7 @@ export default function QuizForm() {
                     <div className="quiz-item">
                         <div className="quiz-item-title">
                             <div className="quiz-item-numques">
-                                <p className="quiz-item-numques-num">{`1`}</p>
+                                <p className="quiz-item-numques-num">{chooseQuestion + 1}</p>
                             </div>
                             <p className="quiz-item-ques">{question.question || ""}</p>
                         </div>
@@ -45,18 +29,24 @@ export default function QuizForm() {
                         </div>
                         <div className="quiz-item-breakLine"></div>
                         <div className="quiz-item-box">
-                            {question.choices ?
-                                question.choices.map(choice => {
-                                    return (<QuizItem>
-                                        <p>{choice}</p>
+                            {
+                             question.choices.map((choice,idx) => {
+                                    return (<QuizItem 
+                                    setChooseId= {setChooseId}
+                                    checkClicked={chooseId==idx}
+                                     key = {
+                                        idx
+                                    } >
+                                        <p key={idx}>{choice}</p>
                                     </QuizItem>
-                                    )
-                                }) : null}
+                                    )})
+                            }
+                            
                         </div>
                         <div className="quiz-item-nextBtn">
                             <p className="quiz-item-note">*xyx: chú thích ở đây</p>
                             <Button
-                                onClick={handleFetchQuestion}
+                                onClick={() => handleChooseQuestion(chooseId,setChooseId)}
                                 className="quiz-item-btn"><span>Tiếp</span></Button>{' '}
                         </div>
                     </div>

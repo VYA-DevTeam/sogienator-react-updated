@@ -1,12 +1,15 @@
-import React, { Component } from "react";
-import { Container, Button } from 'react-bootstrap';
+import React from "react";
 import "./quizForm.css";
 import "./../App.css";
 
 export default function QuizItem(props) {
-    const { content, children } = props;
+    const {
+        children,
+        setChooseId,
+        checkClicked
+    } = props;
     return (
-        <div className="quiz-item-box-child" value='1'>
+        <div className={`${checkClicked ? 'checked-click' : 'quiz-item-box-child'}`} onClick={() => setChooseId(children.key)} value={children.key}>
             {children}
         </div>
     )
