@@ -60,14 +60,14 @@ export default function QuizPage({history,match}){
             return;
         }
         
-        let trueIdx = Number(chooseId) + offset
+        let trueIdx = parseInt(chooseId) + offset
         // Set index answer +1
         let newAnswer = [...answer];
         newAnswer[trueIdx] = 1;
         // update State Answer
-        setAnswer(newAnswer);
+        setAnswer((_) => [...newAnswer]);
         // update offset 
-        setOffset((prevState) => questions[chooseQuestion].length + prevState);
+        setOffset((prevState) => questions[chooseQuestion].choices.length + prevState);
         // Set Choose Id to Null
         setChooseId(null);
         // Move Page if end question 
@@ -85,7 +85,6 @@ export default function QuizPage({history,match}){
     useEffect(() => {
         handleFetchQuestion()
     }, [])
-    console.log(chooseQuestion,questions)
     const question = questions[chooseQuestion];
     console.log(answer);
     return(
