@@ -138,6 +138,26 @@
     width: 30%;
     height: 150px;
 }
+.quiz-item-box .checked-click {
+    color: black;
+    border-radius: 20px;
+    color: #393267;
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    position: relative;
+    width: 30%;
+    height: 150px;
+    background-color: #C4126B !important;
+    color: #FFF2F8;
+}
+.checked-click p{
+    margin-bottom: 0px;
+    font-size: 1.5rem;
+}
 .quiz-item-box .quiz-item-box-child p{
     margin-bottom: 0px;
     font-size: 1.5rem;
@@ -156,11 +176,11 @@
         font-size: 2rem;
     }
     .quiz-item-ques{
-        width: 250px;
+        width: 240px;
         font-family: Noto Sans;
         font-style: normal;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 41px;
         text-align: center;
         color: #000000;
@@ -184,6 +204,10 @@
         font-size: 1.25rem;
     }
     .quiz-item-box .quiz-item-box-child{
+        width: 45%;
+        height: 150px;
+    }
+    .quiz-item-box .checked-click{
         width: 45%;
         height: 150px;
     }
