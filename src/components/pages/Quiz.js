@@ -83,10 +83,19 @@ export default function QuizPage({history,match}){
     }
     
     useEffect(() => {
-        handleFetchQuestion()
+        handleFetchQuestion();
     }, [])
     const question = questions[chooseQuestion];
     console.log(answer);
+    const convertToDecimal = (arr = answer) => {
+        // convert to string
+        let answerArr = arr.join("");
+        console.log(`Mang ans o dang chuoi la ${answerArr}`);
+        let answerDecimal = parseInt(answerArr,2);
+        console.log(`Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`);
+        return answerDecimal;
+    }
+    convertToDecimal();
     return(
         <div>
             {
