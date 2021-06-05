@@ -26,7 +26,7 @@ export default function QuizPage({history,match}){
                 type:"Switch"
             }
             response.data.push(nextGeneral);
-            setQuestions(response.data);
+            setQuestions(response.data.sort((a,b)=> a.id-b.id));
             setLoading(false);
         }
     }
@@ -42,13 +42,13 @@ export default function QuizPage({history,match}){
                 const response =  await getApiClient().getQuestionByType(fetchObject[chooseId]);
                 if(response.status === 200) {
                     
-                    setQuestions([...questions, ...response.data])
+                    setQuestions([...questions, ...response.data.sort((a, b) => a.id - b.id)])
                 }
             }if (chooseId == 2) {
                 const resEmo = await getApiClient().getQuestionByType(fetchObject[0]);
                 const resSex = await getApiClient().getQuestionByType(fetchObject[1]);
                 if (resEmo.status === 200 && resSex.status === 200) {
-                    setQuestions([...questions, ...resEmo.data, ...resEmo.data])
+                    setQuestions([...questions, ...resEmo.data.sort((a,b) => a.id-b.id), ...resEmo.data.sort((a,b)=>a.id-b.id)])
                 }
             }
             setLoading(false)
