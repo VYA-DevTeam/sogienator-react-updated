@@ -20,7 +20,7 @@ export default function QuizPage({history,match}){
         const response = await getApiClient().getQuestionByType("general");
         if (response.status === 200) {
             let nextGeneral = {
-                choices:["Xu Hướng Tình Cảm","Xu Hướng Tình Dục","Cả 2", "Không"],
+                choices:["Xu Hướng Tình Cảm","Xu Hướng Tính Dục","Cả 2", "Không"],
                 id: 222,
                 question: "Bạn có muốn tìm hiểu  về 1 trong những điều nào sau đây",
                 type:"Switch"
@@ -81,11 +81,13 @@ export default function QuizPage({history,match}){
         // Increase Question
         setChooseQuestion(chooseQuestion + 1);
     }
+    
     useEffect(() => {
         handleFetchQuestion()
     }, [])
     console.log(chooseQuestion,questions)
     const question = questions[chooseQuestion];
+    console.log(answer);
     return(
         <div>
             {
