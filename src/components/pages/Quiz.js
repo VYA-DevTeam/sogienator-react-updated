@@ -72,7 +72,7 @@ export default function QuizPage({history,match}){
         setChooseId(null);
         // Move Page if end question 
         
-        if (chooseQuestion === questions[chooseQuestion].length - 1) {
+        if (chooseQuestion === questions.length - 1) { //fix loi phan end result
             // Exit tai day
             history.push('/result')
             return;
