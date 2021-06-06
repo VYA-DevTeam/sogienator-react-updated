@@ -26,7 +26,7 @@ export default function QuizPage({history,match}){
                 type:"Switch"
             }
             response.data.push(nextGeneral);
-            setQuestions(response.data);
+            setQuestions(response.data.sort((a,b)=> a.id-b.id));
             setLoading(false);
         }
     }
@@ -42,13 +42,13 @@ export default function QuizPage({history,match}){
                 const response =  await getApiClient().getQuestionByType(fetchObject[chooseId]);
                 if(response.status === 200) {
                     
-                    setQuestions([...questions, ...response.data])
+                    setQuestions([...questions, ...response.data.sort((a, b) => a.id - b.id)])
                 }
             }if (chooseId == 2) {
                 const resEmo = await getApiClient().getQuestionByType(fetchObject[0]);
                 const resSex = await getApiClient().getQuestionByType(fetchObject[1]);
                 if (resEmo.status === 200 && resSex.status === 200) {
-                    setQuestions([...questions, ...resEmo.data, ...resEmo.data])
+                    setQuestions([...questions, ...resEmo.data.sort((a,b) => a.id-b.id), ...resEmo.data.sort((a,b)=>a.id-b.id)])
                 }
             }
             setLoading(false)
@@ -60,19 +60,19 @@ export default function QuizPage({history,match}){
             return;
         }
         
-        let trueIdx = Number(chooseId) + offset
+        let trueIdx = parseInt(chooseId) + offset
         // Set index answer +1
         let newAnswer = [...answer];
         newAnswer[trueIdx] = 1;
         // update State Answer
-        setAnswer(newAnswer);
+        setAnswer((_) => [...newAnswer]);
         // update offset 
-        setOffset((prevState) => questions[chooseQuestion].length + prevState);
+        setOffset((prevState) => questions[chooseQuestion].choices.length + prevState);
         // Set Choose Id to Null
         setChooseId(null);
         // Move Page if end question 
         
-        if (chooseQuestion === questions[chooseQuestion].length - 1) {
+        if (chooseQuestion === questions.length - 1) { //fix loi phan end result
             // Exit tai day
             history.push('/result')
             return;
@@ -83,11 +83,19 @@ export default function QuizPage({history,match}){
     }
     
     useEffect(() => {
-        handleFetchQuestion()
+        handleFetchQuestion();
     }, [])
-    console.log(chooseQuestion,questions)
     const question = questions[chooseQuestion];
     console.log(answer);
+    const convertToDecimal = (arr = answer) => {
+        // convert to string
+        let answerArr = arr.join("");
+        console.log(`Mang ans o dang chuoi la ${answerArr}`);
+        let answerDecimal = parseInt(answerArr,2);
+        console.log(`Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`);
+        return answerDecimal;
+    }
+    convertToDecimal();
     return(
         <div>
             {
