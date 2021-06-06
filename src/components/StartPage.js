@@ -37,7 +37,7 @@ function StartPage() {
           />
         </div>
         <div
-          className="name align-self-center flex-grow-1"
+          className="name-start align-self-center flex-grow-1"
           style={{ "margin-top": "-40px" }}
         >
           Sogiesc Test{" "}

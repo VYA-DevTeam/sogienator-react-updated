@@ -3,6 +3,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import QuizForm from "../QuizForm";
 import Loading from '../Loading';
+import {Link} from 'react-router-dom'
 import {
     getApiClient
 } from "../../client/api";
@@ -94,8 +95,11 @@ export default function QuizPage({history,match}){
         let answerDecimal = parseInt(answerArr,2);
         console.log(`Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`);
         return answerDecimal;
+    //     <Link to={{pathname = "/result",
+    // data: answerDecimal}}></Link>
     }
     convertToDecimal();
+    // const user = convertToDecimal();
     return(
         <div>
             {

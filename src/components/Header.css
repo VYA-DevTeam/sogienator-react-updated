@@ -1,25 +1,38 @@
 .name{
     color: #54424B;
     width: 100%;
-    /* margin-left: -107px; */
+    margin-left: -25%;
     /* filter: drop-shadow(8px 3px 6px gray); */
     font-weight: 600;
-    font-size: 50px;
+    font-size: 40px;
     text-shadow: rgb(219, 173, 173) 6px 2px 4px;
     /* margin-top: 10px; */
 }
+
+.name-start{
+    color: #54424B;
+    width: 100%;
+    /* margin-left: -25%; */
+    /* filter: drop-shadow(8px 3px 6px gray); */
+    font-weight: 600;
+    font-size: 40px;
+    text-shadow: rgb(219, 173, 173) 6px 2px 4px;
+    /* margin-top: 10px; */
+}
+
 .name--organization{
     color: #CA9FB4;
     width: 65%;
     margin-left: 0;
     /* filter: drop-shadow(8px 3px 6px rgb(243, 210, 210)); */
     font-weight: 800;
-    font-size: 60px;
+    font-size: 40px;
     margin: 5px 0 20px 0;
     width: 100%;
 }
 .logo{
     z-index: 1000;
+    padding-left: 20%;
 }
 
 
@@ -30,11 +43,16 @@
 @media screen and (max-width: 768px) {
 .name{
     font-size: 25px;
-        margin-left: -107px;
+ margin-left: -15%;
+ padding-top: 5%;
 
 }
 .name--organization{
     font-size: 25px;
+}
+.logo{
+    max-width: 70px;
+    padding-left: 1px;
 }
     
 }

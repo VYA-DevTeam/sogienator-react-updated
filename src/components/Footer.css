@@ -6,7 +6,7 @@
   width: 100%;
   text-align: center;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 18px;
   background-color: #ffcfe9;
 
 }
@@ -89,7 +89,7 @@ background-color: #ffcfe9;
 
   }
   .footer-container{
-    font-size: 15px;
+    font-size: 13px;
   }
   .contact{
     /* order:1;

@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "./Button";
 import "./FormResult.css";
+import QuizPage from "./pages/Quiz"
+
 
 function FormResult() {
   return (
@@ -18,17 +20,17 @@ function FormResult() {
           />
           <div class="card fb-card">
             <div className="card-header fb-card-header d-flex flex-column">
-              Feedback Form
-              <div className="pt-3">dot here</div>
+            Đánh giá Sogienator
+              {/* <div className="pt-3">dot here</div> */}
             </div>
             <div className="d-flex flex-column bd-highlight form-feedback">
-              <div className="fb-content px-3 pt-3 text-center">
-                Trai nghiem ve ket qua
+              <div className="fb-content px-2 pt-3 text-center">
+              Trải nghiệm về kết quả 
               </div>
-              <div className="list-feedback p-3">
-                <div className="p-2 bd-highlight list-feedback-item ">
-                  <div class="pr-3">Khong chinh xac</div>
-                  <Button
+              <div className="list-feedback p-4">
+                <div className="p-3 bd-highlight list-feedback-item ">
+                  <div class="pr-3">Không chính xác</div>
+                  {/* <Button
                     buttonSize="btn--esmall"
                     buttonStyle="btn--tooltip"
                     data-toggle="tooltip"
@@ -36,17 +38,24 @@ function FormResult() {
                     title="Tooltip on right"
                   >
                     ?
-                  </Button>
+                  </Button> */}
                 </div>
-                <div className=" p-2 bd-highlight list-feedback-item ">
-                  Gan Chinh xac
+                <div className=" p-3 bd-highlight list-feedback-item ">
+                Gần chính xác
                 </div>
-                <div className="p-2 bd-highlight list-feedback-item ">
-                  Chinh xac
+                <div className="p-3 bd-highlight list-feedback-item ">
+                Chính xác
+                </div>
+                <div className="p-3 bd-highlight list-feedback-item ">
+                Có kết quả nhưng cảm thấy không giống với bản thân
+                </div>
+                <div className="p-3 bd-highlight list-feedback-item ">
+                Có kết quả và cảm thấy giống với bản thân
                 </div>
               </div>
-              <div className="fb-content fb-tooltip pb-3 text-center">
-                xyz: Chu thich o day
+
+              <div className="fb-content fb-tooltip px-4 pb-3 text-center">
+              Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
               </div>
             </div>
           </div>
