@@ -32,6 +32,7 @@ export default function QuizPage({history,match}){
             setLoading(false);
         }
     }
+    //Fix lại việc get câu hỏi (get câu hỏi bị sai)
   
     const handleChooseQuestion = async  (chooseId,setChooseId) => {
         if(chooseId == null) {
@@ -59,6 +60,8 @@ export default function QuizPage({history,match}){
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
                 // exit tai day
+                convertToDecimal([...answerGeneral]);
+                //fix: truyền giá trị từ hàm convertToDecimal([...answerGeneral]); qua trang result
                 history.push('/result')
             }
             return;
@@ -85,6 +88,7 @@ export default function QuizPage({history,match}){
         
         if (chooseQuestion === questions.length - 1) { //fix loi phan end result
             // Exit tai day
+            //fix: truyền giá trị từ hàm convertToDecimal([...answerSpecific]) qua trang result
             history.push('/result')
             return;
         }
@@ -97,15 +101,15 @@ export default function QuizPage({history,match}){
         handleFetchQuestion();
     }, [])
     const question = questions[chooseQuestion];
-    const convertToDecimal = (arr = [...answerGeneral,...answerSpecific]) => {
+    const convertToDecimal = (arr) => {
         // convert to string
+        //arr = [...answerGeneral,...answerSpecific]
         let answerArr = arr.join("");
         console.log(`Mang ans o dang chuoi la ${answerArr}`);
         let answerDecimal = parseInt(answerArr,2);
         console.log(`Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`);
         return answerDecimal;
     }
-    convertToDecimal();
     // const user = convertToDecimal();
     return(
         <div>
