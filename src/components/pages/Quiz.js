@@ -9,7 +9,8 @@ import {
 } from "../../client/api";
 export default function QuizPage({history,match}){
     const [questions,setQuestions] = useState([]);
-    const [answer, setAnswer] = useState(new Array(40).fill(0));
+    const [answerGeneral,setAnswerGeneral] = useState(new Array(19).fill(0));
+    const [answerSpecific,setAnswerSpecific] = useState(new Array(22).fill(0));
     const [chooseQuestion, setChooseQuestion] = useState(0);
     const [offset,setOffset] = useState(0);
     const [isLoading,setLoading] = useState(true);
@@ -52,6 +53,8 @@ export default function QuizPage({history,match}){
                     setQuestions([...questions, ...resEmo.data.sort((a,b) => a.id-b.id), ...resEmo.data.sort((a,b)=>a.id-b.id)])
                 }
             }
+            // reset off set;
+            setOffset(0);
             setLoading(false)
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
@@ -62,11 +65,18 @@ export default function QuizPage({history,match}){
         }
         
         let trueIdx = parseInt(chooseId) + offset
-        // Set index answer +1
-        let newAnswer = [...answer];
-        newAnswer[trueIdx] = 1;
-        // update State Answer
-        setAnswer((_) => [...newAnswer]);
+        // check type question is specific;
+            // Set index answer +1
+            // update State Answer
+        if(questions[chooseQuestion].type.includes("specific")) {
+            let newAnswerSpecific = [...answerSpecific];
+            newAnswerSpecific[trueIdx] = 1;
+            setAnswerSpecific((_) => [...newAnswerSpecific])
+        }else {
+            let newAnswerGeneral = [...answerGeneral];
+            newAnswerGeneral[trueIdx] = 1;
+            setAnswerGeneral((_) => [...newAnswerGeneral]);
+        }
         // update offset 
         setOffset((prevState) => questions[chooseQuestion].choices.length + prevState);
         // Set Choose Id to Null
@@ -87,16 +97,13 @@ export default function QuizPage({history,match}){
         handleFetchQuestion();
     }, [])
     const question = questions[chooseQuestion];
-    console.log(answer);
-    const convertToDecimal = (arr = answer) => {
+    const convertToDecimal = (arr = [...answerGeneral,...answerSpecific]) => {
         // convert to string
         let answerArr = arr.join("");
         console.log(`Mang ans o dang chuoi la ${answerArr}`);
         let answerDecimal = parseInt(answerArr,2);
         console.log(`Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`);
         return answerDecimal;
-    //     <Link to={{pathname = "/result",
-    // data: answerDecimal}}></Link>
     }
     convertToDecimal();
     // const user = convertToDecimal();
