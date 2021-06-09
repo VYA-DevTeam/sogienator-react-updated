@@ -4,7 +4,8 @@ import Header from "../Header";
 import "../../App.css";
 import FormResult from "../FormResult";
 
-function Result() {
+function Result({location}) {
+  console.log(location.state.answerGeneral)
   return (
     <div>
       <Header></Header>

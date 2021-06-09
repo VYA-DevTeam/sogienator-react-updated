@@ -50,7 +50,7 @@ export default function QuizPage({history,match}){
                 const resEmo = await getApiClient().getQuestionByType(fetchObject[0]);
                 const resSex = await getApiClient().getQuestionByType(fetchObject[1]);
                 if (resEmo.status === 200 && resSex.status === 200) {
-                    setQuestions([...questions, ...resEmo.data.sort((a,b) => a.id-b.id), ...resEmo.data.sort((a,b)=>a.id-b.id)])
+                    setQuestions([...questions, ...resEmo.data.sort((a, b) => a.id - b.id), ...resSex.data.sort((a,b)=>a.id-b.id)])
                 }
             }
             // reset off set;
@@ -59,7 +59,12 @@ export default function QuizPage({history,match}){
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
                 // exit tai day
-                history.push('/result')
+                history.push({
+                    pathname:"/result",
+                    state:{
+                        answer: answerGeneral
+                    }
+                })
             }
             return;
         }
@@ -85,7 +90,13 @@ export default function QuizPage({history,match}){
         
         if (chooseQuestion === questions.length - 1) { //fix loi phan end result
             // Exit tai day
-            history.push('/result')
+            history.push({
+                pathname: "/result",
+                state: {
+                    answerGeneral,
+                    answerSpecific
+                }
+            })
             return;
         }
         
