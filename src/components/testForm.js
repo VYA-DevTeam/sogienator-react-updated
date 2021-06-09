@@ -19,7 +19,6 @@ function TestForm() {
               src="/images/explain-crop.png"
               className="img-fluid test-img px-3 mx-auto d-block"
               alt="welcome mascos"
-              // style={{ maxWidth: 450 + "px" }}
             />
             <div
               class="card card-border test-question mb-3 "
