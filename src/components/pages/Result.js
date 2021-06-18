@@ -9,7 +9,8 @@ function Result({location}) {
   return (
     <div>
       <Header></Header>
-      <FormResult></FormResult>
+      <FormResult>
+      </FormResult>
       <Footer />
     </div>
   );
