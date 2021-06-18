@@ -45,35 +45,43 @@ margin-top: 3%;
   border-radius: 20px !important;
   z-index: 2;
   font-size: 20px;
+  margin-right: 6%;
+  display: flex;
 }
 .fb-card-header {
-  color: #393267;
+  /* color: #393267; */
   background-color: #ffcfe9;
   font-weight: 800;
   /* max-width: 300px; */
   text-align: center;
-  padding: 10px;
+  width: 400px;
+  /* top:10px; */
+  /* position: sticky; */
+  /* display: inline; */
   border-radius: 20px 20px 0px 0px !important;
 }
 .form-feedback {
   height: 100%;
   background-color: #393267 !important;
-  border-radius: 20px;
-  font-size: 18px;
+  border-radius:  0 0 20px 20px;
+  font-size: 17px; 
+  width: 400px;
+  position: absolute; 
+  overflow: scroll;
 }
 .fb-content {
   font-weight: 800;
   color: #fff2f8;
   background-color: #393267 !important;
-  border-radius: 0 0 20px 20px;
+  /* border-radius: 20px 20px 0 0!important; */
 }
 .list-feedback {
   background-color: #393267 !important;
-  border-radius: 20px !important;
+  /* border-radius: 20px !important; */
 }
 .list-feedback-item {
-  color: #fff2f8;
-  background-color: #746f94 !important;
+  color: black;
+  background-color: #FFF2F8 !important;
   /* border-radius: 40px; */
   margin-left: 10px;
   display: flex;
@@ -82,17 +90,35 @@ margin-top: 3%;
 .list-feedback-item:first-child {
   border-radius: 20px 20px 0px 0px;
 }
-.list-feedback-item:last-child {
+.list-feedback-item:last-of-type {
   border-radius: 0px 0px 20px 20px;
 }
-.list-feedback-item:active {
-  background-color: #FFC8C8 !important;
-
-}
+/* .list-feedback-item:active {
+  background-color: #FFD2DA !important;
+} */
 .fb-tooltip{
   font-size: 12px;
 }
-
+.fb-text{
+  background-color: #FFD2DA !important;
+  border-radius: 20px !important;
+}
+.fb-textarea{
+  background-color: #FFD2DA !important;
+  border: none;
+  padding-right: 100px;
+}
+.fb-btn{
+  border-radius: 100%;
+  background-color:#c3126b;
+  border: none;
+  margin: auto;
+  padding: auto;
+  color: white;
+}
+.fb-btn-round{
+background-color:  #393267 !important;
+}
 @media screen and (max-width: 820px) {
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
