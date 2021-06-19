@@ -1,28 +1,76 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import "./FormResult.css";
+import MobileDetect from "mobile-detect";
+import platform from "platform";
 import QuizPage from "./pages/Quiz";
+import customAxios from "../client/request";
 // import {
 //   getApiClient
 // } from "../../client/result";
 import axios from "axios";
+// var md = new MobileDetect(window.navigator.userAgent);
+// console.log(md);
 
-function FormResult() {
+const FormResult = () => {
   const [value, setValue, isLoading] = useState("");
-  const handleResult = () => {
-    axios.get("https://vya-sogienator.herokuapp.com/result", {
-      params: {
-        key: 165904,
-      },
-    });
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState(false);
+
+  // const handleResult = () => {
+  //   axios.get("https://vya-sogienator.herokuapp.com/result", {
+  //     params: {
+  //       key: 165904,
+  //     },
+  //   });
+  // };
+  const feedback = (param) =>
+    customAxios.post("result", param).then((res) => res.data);
+  var md = new MobileDetect(window.navigator.userAgent);
+  const device = "";
+  if (md.phone() != null) device = md.phone();
+  else if (md.tablet() != null) device = md.tablet();
+  else device = "Desktop";
+  console.log(device);
+
+  // const device = {
+  // name: platform.name,
+  // version: platform.version,
+  // product: platform.product,
+  // manufacture: platform.manufacturer,
+  // layout: platform.layout,
+  // os: platform.os,
+  // description: platform.description,
+  // };
+  const formInfo_ = {
+    accuracy: "",
+    age: "",
+    additional: "",
+    device,
   };
+  const onSubmit_ = (data) => {
+    console.log(data);
+    setSubmitting(data)
+      .then((res) => {
+        console.log("Feedback succesfully");
+        setShow(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      })
+      .finally(() => setSubmitting(false));
+  };
+  // console.log(formInfo);
+
   // const result = (props)
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
         <div className="result-form">
           <div className="text">Kết quả của bạn là </div>
-          <button className="box-result" onClick={handleResult}></button>
+          <button className="box-result"></button>
           {/* {value} + Hey */}
         </div>
         <div className="fb-form justify-content-center">
@@ -32,11 +80,12 @@ function FormResult() {
             alt="wow mascos"
           />
           <div class="card fb-card">
-          <div className="fb-card-header p-3 mb-3">
-              Đánh giá Sogienator
-            </div>
-            <div className="d-flex flex-column bd-highlight form-feedback">
-            
+            <div className="fb-card-header p-3 mb-3">Đánh giá Sogienator</div>
+            <div
+              className="d-flex flex-column bd-highlight form-feedback"
+              onSubmit={onSubmit_}
+              formInfo={formInfo_}
+            >
               <div className="fb-content px-2 pt-3  text-center">
                 Trải nghiệm về kết quả
               </div>
@@ -102,7 +151,7 @@ function FormResult() {
                   </Button>
                 </div>
               </div>
-{/* 
+              {/* 
               <div className="fb-content fb-tooltip px-4 pb-3 text-center">
                 Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
               </div> */}
@@ -112,7 +161,6 @@ function FormResult() {
               <div className="list-feedback p-4">
                 <div className="p-3 bd-highlight list-feedback-item ">
                   <div class="pr-3"> Dưới 15</div>
-                 
                 </div>
                 <div className=" p-3 bd-highlight list-feedback-item ">
                   Trong độ tuổi từ 15 đến 20
@@ -127,7 +175,7 @@ function FormResult() {
               {/* <div className="fb-content fb-tooltip px-4 pb-3 text-center">
                 Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
               </div> */}
-              <div className="fb-content px-3 pt-3 text-center">
+              <div className="fb-content px-4 pt-2 text-center">
                 Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An
                 không?{" "}
               </div>
@@ -140,7 +188,9 @@ function FormResult() {
                   ></textarea>
                 </div>
                 <div className="list-feedback-item fb-btn-round ">
-                  <button className="p-3 mt-3 fb-btn ">Gửi</button>
+                  <button className="p-3 mt-3 fb-btn " type="submit">
+                    Gửi
+                  </button>
                 </div>
               </div>
             </div>
@@ -149,6 +199,6 @@ function FormResult() {
       </div>
     </div>
   );
-}
+};
 
 export default FormResult;
