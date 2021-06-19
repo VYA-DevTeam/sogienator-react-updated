@@ -38,12 +38,11 @@ function StartPage() {
         </div>
         <div
           className="name-start align-self-center flex-grow-1"
-          style={{ "margin-top": "-40px" }}
         >
           Sogiesc Test{" "}
         </div>
       </div>
-      <div className="form-container main d-flex flex-column bd-highlight mb-3 text-center">
+      <div className="form-container main d-flex flex-column bd-highlight mt-2 mb-3 text-center">
         <BounceInLeftDiv>
           <div className="name--organization">Vietnam Youth Alliance</div>
         </BounceInLeftDiv>

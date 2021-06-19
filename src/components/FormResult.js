@@ -34,11 +34,12 @@ const FormResult = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getResult = () => {
+  const getResult = (choice) => {
     axios
       .get("https://vya-sogienator.herokuapp.com/result", {
         params: {
-          key: 165904,
+          // key: 165904,
+          key: {choice},
         },
       })
       .then(function (response) {
