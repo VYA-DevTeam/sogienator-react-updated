@@ -5,7 +5,7 @@ import "../../App.css";
 import FormResult from "../FormResult";
 
 function Result({location}) {
-  console.log(location.state.answerGeneral)
+  // console.log(location.state.answerGeneral)
   return (
     <div>
       <Header></Header>

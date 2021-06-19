@@ -5,19 +5,14 @@ import MobileDetect from "mobile-detect";
 import platform from "platform";
 import QuizPage from "./pages/Quiz";
 import customAxios from "../client/request";
-// import {
-//   getApiClient
-// } from "../../client/result";
+import "react-tippy/dist/tippy.css";
+import { Tooltip } from "react-tippy";
+
 import axios from "axios";
 // var md = new MobileDetect(window.navigator.userAgent);
 // console.log(md);
 
 const FormResult = () => {
-  const [value, setValue, isLoading] = useState("");
-  const [isSubmitting, setSubmitting] = useState(false);
-  const [show, setShow] = useState(false);
-  const [error, setError] = useState(false);
-
   // const handleResult = () => {
   //   axios.get("https://vya-sogienator.herokuapp.com/result", {
   //     params: {
@@ -25,10 +20,11 @@ const FormResult = () => {
   //     },
   //   });
   // };
+  let device = "";
+
   const feedback = (param) =>
     customAxios.post("result", param).then((res) => res.data);
   var md = new MobileDetect(window.navigator.userAgent);
-  const device = "";
   if (md.phone() != null) device = md.phone();
   else if (md.tablet() != null) device = md.tablet();
   else device = "Desktop";
@@ -49,22 +45,7 @@ const FormResult = () => {
     additional: "",
     device,
   };
-  const onSubmit_ = (data) => {
-    console.log(data);
-    setSubmitting(data)
-      .then((res) => {
-        console.log("Feedback succesfully");
-        setShow(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(true);
-      })
-      .finally(() => setSubmitting(false));
-  };
-  // console.log(formInfo);
-
-  // const result = (props)
+  console.log(formInfo_);
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
@@ -83,7 +64,6 @@ const FormResult = () => {
             <div className="fb-card-header p-3 mb-3">Đánh giá Sogienator</div>
             <div
               className="d-flex flex-column bd-highlight form-feedback"
-              onSubmit={onSubmit_}
               formInfo={formInfo_}
             >
               <div className="fb-content px-2 pt-3  text-center">
@@ -92,63 +72,67 @@ const FormResult = () => {
               <div className="list-feedback px-3 pt-2 mr-1">
                 <div className="p-3 bd-highlight list-feedback-item ">
                   <div class="pr-3">Không chính xác</div>
-                  <Button
-                    buttonSize="btn--esmall"
-                    buttonStyle="btn--tooltip"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Tooltip on right"
-                  >
-                    ?
-                  </Button>
                 </div>
                 <div className=" p-3 bd-highlight list-feedback-item ">
                   Gần chính xác
-                  <Button
-                    buttonSize="btn--esmall"
-                    buttonStyle="btn--tooltip"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Tooltip on right"
+                  <Tooltip
+                    title="Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ"
+                    position="top"
+                    trigger="mouseenter"
+                    animation="fade"
+                    theme= "dark"
+                    className ="fb-tooltip"
+                    size="regular"
                   >
-                    ?
-                  </Button>
+                    <Button
+                      buttonSize="btn--esmall"
+                      buttonStyle="btn--tooltip"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title="Tooltip on right"
+                    >
+                      ?
+                    </Button>
+                  </Tooltip>
                 </div>
                 <div className="p-3 bd-highlight list-feedback-item ">
                   Chính xác
-                  <Button
-                    buttonSize="btn--esmall"
-                    buttonStyle="btn--tooltip"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Tooltip on right"
-                  >
-                    ?
-                  </Button>
                 </div>
                 <div className="p-3 bd-highlight list-feedback-item ">
                   Có kết quả nhưng cảm thấy không giống với bản thân
-                  <Button
-                    buttonSize="btn--esmall"
-                    buttonStyle="btn--tooltip"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Tooltip on right"
+                  <Tooltip
+                    title="Nếu bạn chưa từng xác định trước"
+                    position="top"
+                    trigger="mouseenter"
                   >
-                    ?
-                  </Button>
+                    <Button
+                      buttonSize="btn--esmall"
+                      buttonStyle="btn--tooltip"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title="Tooltip on right"
+                    >
+                      ?
+                    </Button>
+                  </Tooltip>
                 </div>
                 <div className="p-3 bd-highlight list-feedback-item ">
                   Có kết quả và cảm thấy giống với bản thân
-                  <Button
-                    buttonSize="btn--esmall"
-                    buttonStyle="btn--tooltip"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Tooltip on right"
+                  <Tooltip
+                    title="Nếu bạn từng xác định trước"
+                    position="top"
+                    trigger="mouseenter"
                   >
-                    ?
-                  </Button>
+                    <Button
+                      buttonSize="btn--esmall"
+                      buttonStyle="btn--tooltip"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title="Tooltip on right"
+                    >
+                      ?
+                    </Button>
+                  </Tooltip>
                 </div>
               </div>
               {/* 

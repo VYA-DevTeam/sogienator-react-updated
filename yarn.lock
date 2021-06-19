@@ -13709,6 +13709,11 @@
   dependencies:
     "ts-pnp" "^1.1.6"
 
+"popper.js@^1.11.1":
+  "integrity" "sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ=="
+  "resolved" "https://registry.npmjs.org/popper.js/-/popper.js-1.16.1.tgz"
+  "version" "1.16.1"
+
 "portfinder@^1.0.26":
   "integrity" "sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA=="
   "resolved" "https://registry.npmjs.org/portfinder/-/portfinder-1.0.28.tgz"
@@ -15133,6 +15138,13 @@
     "@react-spring/three" "~9.1.2"
     "@react-spring/web" "~9.1.2"
     "@react-spring/zdog" "~9.1.2"
+
+"react-tippy@^1.4.0":
+  "integrity" "sha512-r/hM5XK9Ztr2ZY7IWKuRmISTlUPS/R6ddz6PO2EuxCgW+4JBcGZRPU06XcVPRDCOIiio8ryBQFrXMhFMhsuaHA=="
+  "resolved" "https://registry.npmjs.org/react-tippy/-/react-tippy-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "popper.js" "^1.11.1"
 
 "react-transition-group@^2.7.0":
   "integrity" "sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg=="
