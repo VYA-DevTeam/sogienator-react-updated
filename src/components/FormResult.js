@@ -8,8 +8,14 @@ import axios from "axios";
 // var md = new MobileDetect(window.navigator.userAgent);
 // console.log(md);
 
-const FormResult = () => {
+const FormResult = (props) => {
+  const { choice } = props;
   const url = "";
+
+  useEffect(() => {
+    // console.log(history);
+  }, []);
+
   const toTitleCase = (phrase) => {
     return phrase
       .toLowerCase()
@@ -34,12 +40,12 @@ const FormResult = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getResult = (choice) => {
+  const getResult = (choiceId = choice) => {
     axios
       .get("https://vya-sogienator.herokuapp.com/result", {
         params: {
           // key: 165904,
-          key: {choice},
+          key: { choiceId },
         },
       })
       .then(function (response) {
@@ -57,9 +63,7 @@ const FormResult = () => {
       });
   };
   // getResult();
-  useEffect(() => {
-    getResult();
-  }, []);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -92,7 +96,7 @@ const FormResult = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(window.confirm("Do you really want to submit the form?")){
+    if (window.confirm("Do you really want to submit the form?")) {
       axios
         .post(url, {
           accuracy: data.accuracy,
@@ -126,7 +130,7 @@ const FormResult = () => {
         <div className="result-form">
           <div className="text">Kết quả của bạn là </div>
           {result && <div className="box-result">{result}</div>}
-          {/* {value} + Hey */}
+          {choice}
         </div>
         <div className="fb-form justify-content-center">
           <img

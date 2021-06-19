@@ -5,7 +5,6 @@ import QuizForm from "../QuizForm";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { getApiClient } from "../../client/api";
-import getResult from "../FormResult";
 export default function QuizPage({ history, match }) {
   const [questions, setQuestions] = useState([]);
   const [answer, setAnswer] = useState(new Array(40).fill(0));
@@ -69,7 +68,9 @@ export default function QuizPage({ history, match }) {
       );
       if (chooseId == 3) {
         // exit tai day
-        history.push("/result");
+        const choice = convertToDecimal();
+        console.log(choice);
+        history.push(`/result`, { choiceId: choice });
       }
       return;
     }
@@ -103,7 +104,10 @@ export default function QuizPage({ history, match }) {
     handleFetchQuestion();
   }, []);
   const question = questions[chooseQuestion];
+
   console.log(answer);
+
+
   const convertToDecimal = (arr = answer) => {
     // convert to string
     let answerArr = arr.join("");
@@ -116,8 +120,7 @@ export default function QuizPage({ history, match }) {
     //     <Link to={{pathname = "/result",
     // data: answerDecimal}}></Link>
   };
-  <getResult choice = {convertToDecimal()}/> 
-  console.log("props: " + choice);
+
   return (
     <div>
       {isLoading ? (
