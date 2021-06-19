@@ -18,10 +18,9 @@ const FormResult = () => {
       .join(" ");
   };
   let device = "";
-
   var md = new MobileDetect(window.navigator.userAgent);
-  if (md.phone() != null) device = md.phone();
-  else if (md.tablet() != null) device = md.tablet();
+  if (md.phone() != null) device = "Phone";
+  else if (md.tablet() != null) device = "Tablet";
   else device = "Desktop";
   console.log(device);
 
@@ -68,11 +67,6 @@ const FormResult = () => {
 
   // const feedback = (param) =>
   //   customAxios.post("result", param).then((res) => res.data);
-  var md = new MobileDetect(window.navigator.userAgent);
-  if (md.phone() != null) device = md.phone();
-  else if (md.tablet() != null) device = md.tablet();
-  else device = "Desktop";
-  console.log(device);
 
   function checkType() {
     if (
@@ -83,7 +77,7 @@ const FormResult = () => {
       return "mobile";
     } else return "tablet, laptop";
   }
-  console.log(checkType());
+  // console.log(checkType());
 
   // const device = {
   // name: platform.name,
