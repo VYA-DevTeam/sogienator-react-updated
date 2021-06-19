@@ -107,7 +107,8 @@
 .fb-textarea {
   background-color: #ffd2da !important;
   border: none;
-  padding-right: 100px;
+  width: 300px;
+  /* padding-right: 100px; */
 }
 .fb-btn {
   border-radius: 100%;
@@ -120,7 +121,9 @@
 .fb-btn-round {
   background-color: #393267 !important;
 }
-
+.first-q{
+  cursor: pointer;
+}
 @media screen and (max-width: 820px) {
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -143,10 +146,10 @@
   .text {
     font-size: 20px;
   }
-  .fb-form {
+  /* .fb-form {
     display: block;
     padding: auto;
-  }
+  } */
   .fb-image {
     position: relative;
     max-width: 400px;

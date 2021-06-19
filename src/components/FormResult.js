@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import "./FormResult.css";
 import MobileDetect from "mobile-detect";
-import platform from "platform";
-import QuizPage from "./pages/Quiz";
-import customAxios from "../client/request";
 import "react-tippy/dist/tippy.css";
 import { Tooltip } from "react-tippy";
 import axios from "axios";
@@ -12,15 +9,29 @@ import axios from "axios";
 // console.log(md);
 
 const FormResult = () => {
+  const url = "";
   const toTitleCase = (phrase) => {
     return phrase
       .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
-  
+  let device = "";
+
+  var md = new MobileDetect(window.navigator.userAgent);
+  if (md.phone() != null) device = md.phone();
+  else if (md.tablet() != null) device = md.tablet();
+  else device = "Desktop";
+  console.log(device);
+
   const [result, setResult] = useState([]);
+  const [data, setData] = useState({
+    accuracy: "",
+    age: "",
+    additional: "",
+    device: device,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -54,7 +65,6 @@ const FormResult = () => {
     return <div>Loading...</div>;
   }
   //  console.log(location.state.answerGeneral)
-  let device = "";
 
   // const feedback = (param) =>
   //   customAxios.post("result", param).then((res) => res.data);
@@ -85,20 +95,35 @@ const FormResult = () => {
   // description: platform.description,
   // };
 
-  const formInfo_ = {
-    accuracy: "",
-    age: "",
-    additional: "",
-    device,
-  };
-  console.log(formInfo_);
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Submmited");
+    if(window.confirm("Do you really want to submit the form?")){
+      axios
+        .post(url, {
+          accuracy: data.accuracy,
+          age: data.age,
+          additional: data.additional,
+          device: data.device,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+      alert("Đã gửi");
+      console.log("Submmited");
+    }
+    return false;
   }
-  const handleClick = () => {
-    console.log("clicked");
-  };
+  function handleClick(e) {
+    const newdata = { ...data };
+    newdata[e.target.id] = e.target.value;
+    setData(newdata);
+    console.log(newdata);
+  }
+  function handleChoose(e) {
+    const newdata = { ...data };
+    newdata[e.target.id] = e.target.data;
+    setData(newdata);
+  }
   // const [background, setBackground] = useState ("#FFD2DA");
   return (
     <div className="form-container">
@@ -116,15 +141,20 @@ const FormResult = () => {
           />
           <div class="card fb-card">
             <div className="fb-card-header p-3 mb-3">Đánh giá Sogienator</div>
-            <div className="d-flex flex-column bd-highlight form-feedback">
-              <div
-                className="fb-content px-2 pt-3  text-center"
-                onSubmit={handleSubmit}
-              >
+            <form
+              className="d-flex flex-column bd-highlight form-feedback"
+              onSubmit={(e) => handleSubmit(e)}
+            >
+              <div className="fb-content px-2 pt-3  text-center">
                 Trải nghiệm về kết quả
               </div>
               <div className="list-feedback px-3 pt-2 mr-1">
-                <div className="first-q" onClick={handleClick()}>
+                <div
+                  className="first-q"
+                  onChange={(e) => handleClick(e)}
+                  id="accuracy"
+                  value={data.accuracy}
+                >
                   <div className="p-3 bd-highlight list-feedback-item ">
                     <div class="pr-3">Không chính xác</div>
                   </div>
@@ -195,45 +225,62 @@ const FormResult = () => {
               <div className="fb-content fb-tooltip px-4 pb-3 text-center">
                 Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
               </div> */}
-              <div className="fb-content px-2 pt-3 text-center">
-                Tuổi của bạn{" "}
-              </div>
-              <div className="list-feedback p-4">
-                <div className="p-3 bd-highlight list-feedback-item ">
-                  <div class="pr-3"> Dưới 15</div>
+              <div
+                className="first-q"
+                // onClick={handleClick()}
+                onChange={(e) => handleClick(e)}
+                id="age"
+                value={data.date}
+              >
+                <div className="fb-content px-2 pt-3 text-center">
+                  Tuổi của bạn{" "}
                 </div>
-                <div className=" p-3 bd-highlight list-feedback-item ">
-                  Trong độ tuổi từ 15 đến 20
-                </div>
-                <div className="p-3 bd-highlight list-feedback-item ">
-                  Trong độ tuổi từ 21 đến 30
-                </div>
-                <div className="p-3 bd-highlight list-feedback-item ">
-                  Trên 30
+                <div className="list-feedback p-4">
+                  <div className="p-3 bd-highlight list-feedback-item ">
+                    <div class="pr-3"> Dưới 15</div>
+                  </div>
+                  <div className=" p-3 bd-highlight list-feedback-item ">
+                    Trong độ tuổi từ 15 đến 20
+                  </div>
+                  <div className="p-3 bd-highlight list-feedback-item ">
+                    Trong độ tuổi từ 21 đến 30
+                  </div>
+                  <div className="p-3 bd-highlight list-feedback-item ">
+                    Trên 30
+                  </div>
                 </div>
               </div>
               {/* <div className="fb-content fb-tooltip px-4 pb-3 text-center">
                 Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
               </div> */}
-              <div className="fb-content px-4 pt-2 text-center">
-                Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An
-                không?{" "}
-              </div>
-              <div className="list-feedback p-4">
-                <div className="p-3 bd-highlight list-feedback-item fb-text ">
-                  <textarea
-                    className="fb-textarea"
-                    row="4"
-                    placeholder="Câu trả lời của bạn"
-                  ></textarea>
+              <div
+                className="first-q"
+                // onClick={handleClick()}
+                onChange={(e) => handleClick(e)}
+                id="additional"
+                value={data.additional}
+              >
+                <div className="fb-content px-4 pt-2 text-center">
+                  Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An
+                  không?{" "}
                 </div>
-                <div className="list-feedback-item fb-btn-round ">
-                  <button className="p-3 mt-3 fb-btn " type="submit">
-                    Gửi
-                  </button>
+                <div className="list-feedback p-4">
+                  <div className="p-3 bd-highlight list-feedback-item fb-text ">
+                    <textarea
+                      className="fb-textarea"
+                      row="4"
+                      placeholder="Câu trả lời của bạn"
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div className="list-feedback-item pb-3 fb-btn-round ">
+                <button className="p-3 fb-btn " type="submit">
+                  Gửi
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
