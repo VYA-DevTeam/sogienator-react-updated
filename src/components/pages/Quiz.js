@@ -15,6 +15,8 @@ export default function QuizPage({history,match}){
     const [offset,setOffset] = useState(0);
     const [isLoading,setLoading] = useState(true);
     const [answerType, setAnswerType] = useState("general")
+    const [answerID, setAnswerID] = useState()
+
     const fetchObject = {
           0: "specific_emotional",
           1: "specific_sexual",
@@ -61,11 +63,14 @@ export default function QuizPage({history,match}){
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
                 // exit tai day
-                let choice = convertToDecimal(answerGeneral);
+                let answerID = convertToDecimal(answerGeneral);
+                setAnswerID (answerID);
+                // console.log (answerType)
+                // let choice = convertToDecimal(answerGeneral);
                 history.push({
                     pathname:"/result",
                     state:{
-                      choiceID: choice,
+                      choiceID: answerID,
                       answerType: answerType,
                     }
                 })
@@ -94,15 +99,18 @@ export default function QuizPage({history,match}){
         
         if (chooseQuestion === questions.length - 1) { //fix loi phan end result
             // Exit tai day
-            console.log(convertToDecimal(answerSpecific));
-            let choice = convertToDecimal(answerSpecific);
+            let answerID = convertToDecimal(answerSpecific);
+                setAnswerID (answerID);
+            // console.log(answerSpecific);
+            // console.log( convertToDecimal(answerSpecific))
+            // let choice = convertToDecimal(answerSpecific);
             let answerType = "specific";
             setAnswerType(answerType)
             history.push({
                 pathname: "/result",
                 state: {
                     // answerGeneral: convertToDecimal(answerGeneral),
-                    choiceID: choice,
+                    choiceID: answerID,
                     answerType: answerType,
                 }
             })

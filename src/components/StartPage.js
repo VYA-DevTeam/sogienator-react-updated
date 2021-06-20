@@ -36,9 +36,7 @@ function StartPage() {
             // style={{ "max-width": "70px" }}
           />
         </div>
-        <div
-          className="name-start align-self-center flex-grow-1"
-        >
+        <div className="name-start align-self-center flex-grow-1">
           Sogiesc Test{" "}
         </div>
       </div>
@@ -71,7 +69,7 @@ function StartPage() {
             />
             <div className="btn--control">
               <Button
-                // className="home-btn"
+                // pathname ="/quiz" // className="home-btn"
                 buttonSize="btn--medium"
                 buttonStyle="btn--home"
                 className="btn-ref pt-3"

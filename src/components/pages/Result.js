@@ -26,9 +26,9 @@ function Result(props) {
   const getResult = () => {
     let choiceID = history.location.state.choiceID;
     let choiceType = history.location.state.answerType;
-    console.log(choiceID, choiceType);
+    // console.log(choiceID, choiceType);
     if (choiceType === "general") {
-      console.log("g");
+      // console.log("g");
       axios
         .get("https://vya-sogienator.herokuapp.com/result", {
           params: {
@@ -39,7 +39,7 @@ function Result(props) {
         .then(function (response) {
           console.log(response.data[0].value);
           setResult(toTitleCase(response.data[0].value));
-          console.log(result);
+          // console.log(result);
         });
     } else {
       console.log("s");
@@ -56,6 +56,7 @@ function Result(props) {
               "Not found result, data length: " + response.data.length
             );
             console.log(response);
+            setResult("Bán Vô Tính");
           } else {
             console.log(response.data.length);
             console.log(response);

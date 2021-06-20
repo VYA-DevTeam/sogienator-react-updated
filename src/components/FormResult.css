@@ -122,8 +122,8 @@
 .fb-btn-round {
   background-color: #393267 !important;
 }
-.first-q {
-}
+/* .first-q {
+} */
 .first-q *.list-feedback-item:active {
   background-color: #c3126b;
 }
