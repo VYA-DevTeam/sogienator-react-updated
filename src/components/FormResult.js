@@ -9,7 +9,14 @@ import axios from "axios";
 // console.log(md);
 
 const FormResult = () => {
+  // const { choice } = props;
   const url = "";
+
+
+  useEffect(() => {
+    // console.log(history);
+  }, []);
+
   const toTitleCase = (phrase) => {
     return phrase
       .toLowerCase()
@@ -18,14 +25,13 @@ const FormResult = () => {
       .join(" ");
   };
   let device = "";
-
   var md = new MobileDetect(window.navigator.userAgent);
-  if (md.phone() != null) device = md.phone();
-  else if (md.tablet() != null) device = md.tablet();
+  if (md.phone() != null) device = "Phone";
+  else if (md.tablet() != null) device = "Tablet";
   else device = "Desktop";
   console.log(device);
 
-  const [result, setResult] = useState([]);
+  // const [result, setResult] = useState([]);
   const [data, setData] = useState({
     accuracy: "",
     age: "",
@@ -35,31 +41,55 @@ const FormResult = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getResult = () => {
-    axios
-      .get("https://vya-sogienator.herokuapp.com/result", {
-        params: {
-          key: 165904,
-        },
-      })
-      .then(function (response) {
-        setIsLoading(false);
-        console.log(response.data[0].value);
-        setResult(toTitleCase(response.data[0].value));
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setIsError(true);
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  };
+  // const getResult = (choiceID, choiceType) => {
+  //   console.log(choiceType + choiceID);
+  //   if (choiceType === "general"){
+  //   axios
+  //     .get("https://vya-sogienator.herokuapp.com/result", {
+  //       params: {
+  //         // key: 165904,
+  //         key: choiceID,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       setIsLoading(false);
+  //       console.log(response.data[0].value);
+  //       setResult(toTitleCase(response.data[0].value));
+  //       // console.log(setResult(toTitleCase(response.data[0].value)))
+  //     })
+  //     .catch(function (error) {
+  //       setIsLoading(false);
+  //       setIsError(true);
+  //       console.log(error);
+  //     })
+  //     .then(function () {
+  //       // always executed
+  //     });}
+  //     else{
+  //       axios
+  //     .get("https://vya-sogienator.herokuapp.com/specific-result", {
+  //       params: {
+  //         // key: 165904,
+  //         key: choiceID,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       setIsLoading(false);
+  //       console.log(response.data[0].value);
+  //       setResult(toTitleCase(response.data[0].value));
+  //     })
+  //     .catch(function (error) {
+  //       setIsLoading(false);
+  //       setIsError(true);
+  //       console.log(error);
+  //     })
+  //     .then(function () {
+  //       // always executed
+  //     });
+  //     }
+  // };
   // getResult();
-  useEffect(() => {
-    getResult();
-  }, []);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -68,11 +98,6 @@ const FormResult = () => {
 
   // const feedback = (param) =>
   //   customAxios.post("result", param).then((res) => res.data);
-  var md = new MobileDetect(window.navigator.userAgent);
-  if (md.phone() != null) device = md.phone();
-  else if (md.tablet() != null) device = md.tablet();
-  else device = "Desktop";
-  console.log(device);
 
   function checkType() {
     if (
@@ -83,7 +108,7 @@ const FormResult = () => {
       return "mobile";
     } else return "tablet, laptop";
   }
-  console.log(checkType());
+  // console.log(checkType());
 
   // const device = {
   // name: platform.name,
@@ -97,7 +122,7 @@ const FormResult = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(window.confirm("Do you really want to submit the form?")){
+    if (window.confirm("Do you really want to submit the form?")) {
       axios
         .post(url, {
           accuracy: data.accuracy,
@@ -128,11 +153,10 @@ const FormResult = () => {
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
-        <div className="result-form">
+        {/* <div className="result-form">
           <div className="text">Kết quả của bạn là </div>
           {result && <div className="box-result">{result}</div>}
-          {/* {value} + Hey */}
-        </div>
+        </div> */}
         <div className="fb-form justify-content-center">
           <img
             src="/images/wow.png"

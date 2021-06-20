@@ -44,7 +44,7 @@ function Footer() {
             {/* <Link to="/" target="_blank" aria-label="Facebook"> 
              </Link> */}
             <a
-              href="/"
+              href="https://www.instagram.com/vnyouthally/"
               target="_blank"
               aria-label="Instagram"
               className = "style-background"
@@ -53,7 +53,7 @@ function Footer() {
             </a>
           
             <a
-              href="/"
+              href="mailto:vietnam.youth.alliance@gmail.com"
               target="_blank"
               aria-label="Facebook"
               className = "style-background"
