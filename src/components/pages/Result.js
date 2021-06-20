@@ -26,9 +26,9 @@ function Result(props) {
   const getResult = () => {
     let choiceID = history.location.state.choiceID;
     let choiceType = history.location.state.answerType;
-    console.log(choiceID, choiceType);
+    // console.log(choiceID, choiceType);
     if (choiceType === "general") {
-      console.log("g");
+      // console.log("g");
       axios
         .get("https://vya-sogienator.herokuapp.com/result", {
           params: {
@@ -39,7 +39,7 @@ function Result(props) {
         .then(function (response) {
           console.log(response.data[0].value);
           setResult(toTitleCase(response.data[0].value));
-          console.log(result);
+          // console.log(result);
         });
     } else {
       console.log("s");
@@ -56,6 +56,7 @@ function Result(props) {
               "Not found result, data length: " + response.data.length
             );
             console.log(response);
+            setResult("Bán Vô Tính");
           } else {
             console.log(response.data.length);
             console.log(response);
@@ -85,7 +86,7 @@ function Result(props) {
                 position="top"
                 trigger="mouseenter"
               ></Tooltip> */}
-              <Tooltip
+              {/* <Tooltip
                 title="Tìm hiểu thêm ở đây"
                 position="top"
                 trigger="mouseenter"
@@ -102,26 +103,10 @@ function Result(props) {
                 title="Tooltip on right"
               >
                 ?
-              </Button>
+              </Button> */}
             </div>
 
             <div>{result && <div className="box-result">{result}</div>}</div>
-            {/* <div className="result-tooltip">
-              <Tooltip
-                title="Tìm hiểu thêm ở đây"
-                position="right"
-                trigger="mouseenter"
-              ></Tooltip>
-              <Button
-                buttonSize="btn--esmall"
-                buttonStyle="btn--tooltip"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Tooltip on right"
-              >
-                ?
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>
@@ -129,9 +114,7 @@ function Result(props) {
         choiceID={history.location.state.choiceID}
         choiceType={history.location.state.answerType}
       ></FormResult>
-      {/* choiceID = {history.location.state.choiceID}
-      choiceType = {history.location.state.answerType} */}
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 }

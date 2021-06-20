@@ -12,6 +12,7 @@ const FormResult = () => {
   // const { choice } = props;
   const url = "";
 
+
   useEffect(() => {
     // console.log(history);
   }, []);
@@ -30,7 +31,7 @@ const FormResult = () => {
   else device = "Desktop";
   console.log(device);
 
-  const [result, setResult] = useState([]);
+  // const [result, setResult] = useState([]);
   const [data, setData] = useState({
     accuracy: "",
     age: "",
@@ -40,53 +41,53 @@ const FormResult = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getResult = (choiceID, choiceType) => {
-    console.log(choiceType + choiceID);
-    if (choiceType === "general"){
-    axios
-      .get("https://vya-sogienator.herokuapp.com/result", {
-        params: {
-          // key: 165904,
-          key: choiceID,
-        },
-      })
-      .then(function (response) {
-        setIsLoading(false);
-        console.log(response.data[0].value);
-        setResult(toTitleCase(response.data[0].value));
-        // console.log(setResult(toTitleCase(response.data[0].value)))
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setIsError(true);
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });}
-      else{
-        axios
-      .get("https://vya-sogienator.herokuapp.com/specific-result", {
-        params: {
-          // key: 165904,
-          key: choiceID,
-        },
-      })
-      .then(function (response) {
-        setIsLoading(false);
-        console.log(response.data[0].value);
-        setResult(toTitleCase(response.data[0].value));
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setIsError(true);
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-      }
-  };
+  // const getResult = (choiceID, choiceType) => {
+  //   console.log(choiceType + choiceID);
+  //   if (choiceType === "general"){
+  //   axios
+  //     .get("https://vya-sogienator.herokuapp.com/result", {
+  //       params: {
+  //         // key: 165904,
+  //         key: choiceID,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       setIsLoading(false);
+  //       console.log(response.data[0].value);
+  //       setResult(toTitleCase(response.data[0].value));
+  //       // console.log(setResult(toTitleCase(response.data[0].value)))
+  //     })
+  //     .catch(function (error) {
+  //       setIsLoading(false);
+  //       setIsError(true);
+  //       console.log(error);
+  //     })
+  //     .then(function () {
+  //       // always executed
+  //     });}
+  //     else{
+  //       axios
+  //     .get("https://vya-sogienator.herokuapp.com/specific-result", {
+  //       params: {
+  //         // key: 165904,
+  //         key: choiceID,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       setIsLoading(false);
+  //       console.log(response.data[0].value);
+  //       setResult(toTitleCase(response.data[0].value));
+  //     })
+  //     .catch(function (error) {
+  //       setIsLoading(false);
+  //       setIsError(true);
+  //       console.log(error);
+  //     })
+  //     .then(function () {
+  //       // always executed
+  //     });
+  //     }
+  // };
   // getResult();
 
 
