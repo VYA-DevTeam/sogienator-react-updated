@@ -55,7 +55,7 @@
   /* max-width: 300px; */
   text-align: center;
   width: 400px;
-  margin-top:-60px;
+  margin-top: -60px;
   /* position: sticky; */
   /* display: inline; */
   border-radius: 20px 20px 0px 0px !important;
@@ -86,6 +86,7 @@
   margin-left: 10px;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 .list-feedback-item:first-child {
   border-radius: 20px 20px 0px 0px;
@@ -93,9 +94,9 @@
 .list-feedback-item:last-of-type {
   border-radius: 0px 0px 20px 20px;
 }
-/* .list-feedback-item:active {
+.list-feedback-item:active {
   background-color: #FFD2DA !important;
-} */
+}
 .fb-tooltip {
   font-size: 12px;
   max-width: 300px;
@@ -121,26 +122,61 @@
 .fb-btn-round {
   background-color: #393267 !important;
 }
-.first-q{
-  cursor: pointer;
+.first-q {
 }
-@media screen and (max-width: 820px) {
+.first-q *.list-feedback-item:active {
+  background-color: #c3126b;
 }
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1080px) {
+  .fb-form {
+    padding-top: 13%;
+    padding-right: 57%;
+  }
+  .fb-image {
+    max-height: 300px;
+  }
+}
+@media (min-width: 900px) and (max-width: 1440px) {
+  .fb-form {
+    padding-top: 7%;
+  }
+  .fb-image {
+    max-height: 300px;
+  }
+}
+@media screen and (max-width: 760px) {
+  .fb-image {
+    left: 15%;
+  }
+  .fb-card {
+    right: 78%;
+    margin-top: 2%;
+  }
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 667px) {
   .form-container,
   .box-result {
     font-size: 25px !important;
+
   }
   .form-container {
     height: 70%;
+    margin-top: -5%;
   }
+  .fb-form {
+    padding-top: 40%;
+    padding-right: 20%;
+  }
+  .form-feedback,
+  .fb-card-header {
+    width: 290px;
+  }
+
   .box-result {
     width: 270px;
-    height: 90px;
-    padding: 8%;
+    height: 100px;
+    padding: 5%;
     /* margin: 2%; */
   }
   .text {
@@ -153,16 +189,21 @@
   .fb-image {
     position: relative;
     max-width: 400px;
-    max-height: 300px;
-    margin-top: 10%;
-    /* top: 10%;
-transform: rotate(-49deg);
-left: -20%;
-max-width: 250px; */
+    height: 210px;
+    left: 18%;
+    margin-top: -55%;
+    z-index: 1;
+    /* top: -45%!important;
+     */
+    /* transform: rotate(-49deg);
+ */
+    max-width: 250px;
   }
   .fb-card {
-    top: -107px;
+    right: 90%;
+    margin-top: 13%;
     /*     top: -196px; */
     max-width: 400px;
+    height: 300px;
   }
 }
