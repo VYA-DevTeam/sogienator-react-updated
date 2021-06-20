@@ -104,6 +104,12 @@
   transform: rotate(44deg);
   transition: all 2s; */
 }
+.result-tooltip{
+margin-left: 10%;
+margin-top:-1%;
+z-index: 10;
+position: relative;
+}
 
 .btn--home:hover:after {
   left: 110%;

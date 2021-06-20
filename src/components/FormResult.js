@@ -8,8 +8,8 @@ import axios from "axios";
 // var md = new MobileDetect(window.navigator.userAgent);
 // console.log(md);
 
-const FormResult = (props) => {
-  const { choice } = props;
+const FormResult = () => {
+  // const { choice } = props;
   const url = "";
 
   useEffect(() => {
@@ -40,12 +40,36 @@ const FormResult = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getResult = (choiceId = choice) => {
+  const getResult = (choiceID, choiceType) => {
+    console.log(choiceType + choiceID);
+    if (choiceType === "general"){
     axios
       .get("https://vya-sogienator.herokuapp.com/result", {
         params: {
           // key: 165904,
-          key: { choiceId },
+          key: choiceID,
+        },
+      })
+      .then(function (response) {
+        setIsLoading(false);
+        console.log(response.data[0].value);
+        setResult(toTitleCase(response.data[0].value));
+        // console.log(setResult(toTitleCase(response.data[0].value)))
+      })
+      .catch(function (error) {
+        setIsLoading(false);
+        setIsError(true);
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });}
+      else{
+        axios
+      .get("https://vya-sogienator.herokuapp.com/specific-result", {
+        params: {
+          // key: 165904,
+          key: choiceID,
         },
       })
       .then(function (response) {
@@ -61,6 +85,7 @@ const FormResult = (props) => {
       .then(function () {
         // always executed
       });
+      }
   };
   // getResult();
 
@@ -127,11 +152,10 @@ const FormResult = (props) => {
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
-        <div className="result-form">
+        {/* <div className="result-form">
           <div className="text">Kết quả của bạn là </div>
           {result && <div className="box-result">{result}</div>}
-          {choice}
-        </div>
+        </div> */}
         <div className="fb-form justify-content-center">
           <img
             src="/images/wow.png"
