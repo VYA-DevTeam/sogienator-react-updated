@@ -63,9 +63,10 @@ export default function QuizPage({history,match}){
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
                 // exit tai day
+                console.log ("answer general: "+answerGeneral)
+
                 let answerID = convertToDecimal(answerGeneral);
                 setAnswerID (answerID);
-                // console.log (answerType)
                 // let choice = convertToDecimal(answerGeneral);
                 history.push({
                     pathname:"/result",

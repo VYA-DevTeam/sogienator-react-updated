@@ -86,7 +86,7 @@ function Result(props) {
                 position="top"
                 trigger="mouseenter"
               ></Tooltip> */}
-              <Tooltip
+              {/* <Tooltip
                 title="Tìm hiểu thêm ở đây"
                 position="top"
                 trigger="mouseenter"
@@ -103,26 +103,10 @@ function Result(props) {
                 title="Tooltip on right"
               >
                 ?
-              </Button>
+              </Button> */}
             </div>
 
             <div>{result && <div className="box-result">{result}</div>}</div>
-            {/* <div className="result-tooltip">
-              <Tooltip
-                title="Tìm hiểu thêm ở đây"
-                position="right"
-                trigger="mouseenter"
-              ></Tooltip>
-              <Button
-                buttonSize="btn--esmall"
-                buttonStyle="btn--tooltip"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Tooltip on right"
-              >
-                ?
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>
@@ -130,9 +114,7 @@ function Result(props) {
         choiceID={history.location.state.choiceID}
         choiceType={history.location.state.answerType}
       ></FormResult>
-      {/* choiceID = {history.location.state.choiceID}
-      choiceType = {history.location.state.answerType} */}
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 }
