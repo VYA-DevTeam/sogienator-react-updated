@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./Button";
+import { Link } from "react-router-dom";
 import { bounceInLeft, bounceInUp, fadeInUp } from "react-animations";
 import styled, { keyframes } from "styled-components";
 import { useSpring, animated } from "react-spring";
@@ -47,20 +48,22 @@ function StartPage() {
         <Delay wait={0}>
           <FadeInUpDiv>
             {/* <div className = "d-flex flex-column"> */}
-            <Button
-              buttonSize="btn--large"
-              buttonType="btn--home"
-              className="btn-start"
-              //   className="btn-animation"
-            >
-              <div className="pt-3 justify-content-center text-center">
-                GET STARTED
-              </div>
-              {/* <animated.div
+            <Link to={{ pathname: "/quiz" }}>
+              <Button
+                buttonSize="btn--large"
+                buttonType="btn--home"
+                className="btn-start"
+                //   className="btn-animation"
+              >
+                <div className="pt-3 justify-content-center text-center">
+                  GET STARTED
+                </div>
+                {/* <animated.div
                 style={{ transform: y.interpolate((v) => `translateY(${v}%`) }}
                 className="glance"
               /> */}
-            </Button>
+              </Button>
+            </Link>
             <img
               src="/images/M1.gif"
               className="img-fluid px-3 mx-auto d-block"
@@ -78,6 +81,7 @@ function StartPage() {
                 <div className="justify-content-center text-center">
                   <a
                     href="https://vnyouthally.org/7-dinh-nghia-ve-tinh-duc/"
+                    target="_blank"
                     className="text-decoration-none text-white"
                     style={{ "background-color": "unset" }}
                   >

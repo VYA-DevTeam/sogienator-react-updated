@@ -8,7 +8,6 @@ const STYLES = ["btn--home", "btn--submit", "btn--next", "btn--tooltip"];
 export const Button = ({
   children,
   type,
-  onClick,
   buttonSize,
   buttonStyle,
 }) => {
@@ -18,15 +17,12 @@ export const Button = ({
     : STYLES[0];
 
   return (
-    <Link to="/quiz" className="btn-start">
       <button
         className={`btn ${checkButtonSize} ${checkButtonStyle} `}
-        onClick={onClick}
         type={type}
       >
         {children}
       </button>
-    </Link>
   );
 };
 
