@@ -68,7 +68,7 @@
   font-size: 17px;
   width: 400px;
   position: absolute;
-  overflow: overlay;
+  overflow: scroll;
 }
 .fb-content {
   font-weight: 800;

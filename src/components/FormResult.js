@@ -10,8 +10,7 @@ import axios from "axios";
 
 const FormResult = () => {
   // const { choice } = props;
-  const url = "";
-
+  const url = "https://vya-sogienator.herokuapp.com/feedback-question";
 
   useEffect(() => {
     // console.log(history);
@@ -29,7 +28,7 @@ const FormResult = () => {
   if (md.phone() != null) device = "Phone";
   else if (md.tablet() != null) device = "Tablet";
   else device = "Desktop";
-  console.log(device);
+  // console.log(device);
 
   // const [result, setResult] = useState([]);
   const [data, setData] = useState({
@@ -79,15 +78,20 @@ const FormResult = () => {
   }
   function handleClick(e) {
     const newdata = { ...data };
-    newdata[e.target.id] = e.target.value;
+    console.log("parent id:" + e.target.parentElement.id);
+    console.log("id:" + e.target.id);
+    if (e.target.parentElement.id !== "additional"){
+    newdata[e.target.parentElement.id] = e.target.id;}
+    else {newdata[e.target.parentElement.id] = e.target.value;}
     setData(newdata);
-    console.log(newdata);
+    console.log(data);
   }
-  function handleChoose(e) {
-    const newdata = { ...data };
-    newdata[e.target.id] = e.target.data;
-    setData(newdata);
-  }
+
+  // function getAdditionalValue(e) {
+  //   console.log("parent id:" + e.target.parentElement.id);
+  //   console.log(e);
+  //   data.additional = e.target.value;
+  // }
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
@@ -113,14 +117,14 @@ const FormResult = () => {
               <div className="list-feedback px-3 pt-2 mr-1">
                 <div
                   className="first-q"
-                  onChange={(e) => handleClick(e)}
+                  onClick={(e) => handleClick(e)}
                   id="accuracy"
                   value={data.accuracy}
                 >
-                  <div className="p-3 bd-highlight list-feedback-item ">
-                    <div class="pr-3">Không chính xác</div>
+                  <div className="p-3 bd-highlight list-feedback-item " id="1">
+                    Không chính xác
                   </div>
-                  <div className=" p-3 bd-highlight list-feedback-item ">
+                  <div className=" p-3 bd-highlight list-feedback-item " id="2">
                     Gần chính xác
                     <Tooltip
                       title="Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ"
@@ -142,10 +146,10 @@ const FormResult = () => {
                       </Button>
                     </Tooltip>
                   </div>
-                  <div className="p-3 bd-highlight list-feedback-item ">
+                  <div className="p-3 bd-highlight list-feedback-item " id="3">
                     Chính xác
                   </div>
-                  <div className="p-3 bd-highlight list-feedback-item ">
+                  <div className="p-3 bd-highlight list-feedback-item " id="4">
                     Có kết quả nhưng cảm thấy không giống với bản thân
                     <Tooltip
                       title="Nếu bạn chưa từng xác định trước"
@@ -163,7 +167,7 @@ const FormResult = () => {
                       </Button>
                     </Tooltip>
                   </div>
-                  <div className="p-3 bd-highlight list-feedback-item ">
+                  <div className="p-3 bd-highlight list-feedback-item " id="5">
                     Có kết quả và cảm thấy giống với bản thân
                     <Tooltip
                       title="Nếu bạn từng xác định trước"
@@ -190,24 +194,26 @@ const FormResult = () => {
               <div
                 className="first-q"
                 // onClick={handleClick()}
-                onChange={(e) => handleClick(e)}
-                id="age"
-                value={data.date}
               >
                 <div className="fb-content px-2 pt-3 text-center">
                   Tuổi của bạn{" "}
                 </div>
-                <div className="list-feedback p-4">
-                  <div className="p-3 bd-highlight list-feedback-item ">
-                    <div class="pr-3"> Dưới 15</div>
+                <div
+                  className="list-feedback p-4"
+                  onClick={(e) => handleClick(e)}
+                  id="age"
+                  value={data.age}
+                >
+                  <div className="p-3 bd-highlight list-feedback-item " id="1">
+                    Dưới 15
                   </div>
-                  <div className=" p-3 bd-highlight list-feedback-item ">
+                  <div className=" p-3 bd-highlight list-feedback-item " id="2">
                     Trong độ tuổi từ 15 đến 20
                   </div>
-                  <div className="p-3 bd-highlight list-feedback-item ">
+                  <div className="p-3 bd-highlight list-feedback-item " id="3">
                     Trong độ tuổi từ 21 đến 30
                   </div>
-                  <div className="p-3 bd-highlight list-feedback-item ">
+                  <div className="p-3 bd-highlight list-feedback-item " id="4">
                     Trên 30
                   </div>
                 </div>
@@ -227,11 +233,17 @@ const FormResult = () => {
                   không?{" "}
                 </div>
                 <div className="list-feedback p-4">
-                  <div className="p-3 bd-highlight list-feedback-item fb-text ">
+                  <div
+                    className="p-3 bd-highlight list-feedback-item fb-text "
+                    onClick={(e) => handleClick(e)}
+                    id="additional"
+                    value={data.additional}
+                  >
                     <textarea
                       className="fb-textarea"
                       row="4"
                       placeholder="Câu trả lời của bạn"
+                      type="text"
                     ></textarea>
                   </div>
                 </div>
