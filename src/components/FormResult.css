@@ -47,6 +47,7 @@
   font-size: 20px;
   margin-right: 6%;
   display: flex;
+  border:none;
 }
 .fb-card-header {
   /* color: #393267; */
@@ -67,7 +68,7 @@
   font-size: 17px;
   width: 400px;
   position: absolute;
-  overflow: scroll;
+  overflow: overlay;
 }
 .fb-content {
   font-weight: 800;
@@ -94,9 +95,9 @@
 .list-feedback-item:last-of-type {
   border-radius: 0px 0px 20px 20px;
 }
-.list-feedback-item:active {
+/* .list-feedback-item:active {
   background-color: #FFD2DA !important;
-}
+} */
 .fb-tooltip {
   font-size: 12px;
   max-width: 300px;
@@ -127,6 +128,22 @@
 .first-q *.list-feedback-item:active {
   background-color: #c3126b;
 }
+::-webkit-scrollbar{
+  width: 10px;
+
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ffd2da;
+  /* border-radius: 0 0 20px 20px; */
+
+}
+::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #c3126b;
+}
+
 @media (min-width: 768px) and (max-width: 1080px) {
   .fb-form {
     padding-top: 13%;
@@ -137,7 +154,7 @@
   }
   .box-result{
     width: 600px;
-    height: 150px;
+    max-height: 150px;
   }
 }
 @media (min-width: 900px) and (max-width: 1440px) {
@@ -179,7 +196,7 @@
 
   .box-result {
     width: 270px;
-    height: 100px;
+    max-height: 100px;
     padding: 5%;
     /* margin: 2%; */
   }

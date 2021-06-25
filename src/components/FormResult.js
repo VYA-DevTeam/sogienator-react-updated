@@ -41,56 +41,6 @@ const FormResult = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  // const getResult = (choiceID, choiceType) => {
-  //   console.log(choiceType + choiceID);
-  //   if (choiceType === "general"){
-  //   axios
-  //     .get("https://vya-sogienator.herokuapp.com/result", {
-  //       params: {
-  //         // key: 165904,
-  //         key: choiceID,
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       setIsLoading(false);
-  //       console.log(response.data[0].value);
-  //       setResult(toTitleCase(response.data[0].value));
-  //       // console.log(setResult(toTitleCase(response.data[0].value)))
-  //     })
-  //     .catch(function (error) {
-  //       setIsLoading(false);
-  //       setIsError(true);
-  //       console.log(error);
-  //     })
-  //     .then(function () {
-  //       // always executed
-  //     });}
-  //     else{
-  //       axios
-  //     .get("https://vya-sogienator.herokuapp.com/specific-result", {
-  //       params: {
-  //         // key: 165904,
-  //         key: choiceID,
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       setIsLoading(false);
-  //       console.log(response.data[0].value);
-  //       setResult(toTitleCase(response.data[0].value));
-  //     })
-  //     .catch(function (error) {
-  //       setIsLoading(false);
-  //       setIsError(true);
-  //       console.log(error);
-  //     })
-  //     .then(function () {
-  //       // always executed
-  //     });
-  //     }
-  // };
-  // getResult();
-
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -108,17 +58,6 @@ const FormResult = () => {
       return "mobile";
     } else return "tablet, laptop";
   }
-  // console.log(checkType());
-
-  // const device = {
-  // name: platform.name,
-  // version: platform.version,
-  // product: platform.product,
-  // manufacture: platform.manufacturer,
-  // layout: platform.layout,
-  // os: platform.os,
-  // description: platform.description,
-  // };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -149,7 +88,6 @@ const FormResult = () => {
     newdata[e.target.id] = e.target.data;
     setData(newdata);
   }
-  // const [background, setBackground] = useState ("#FFD2DA");
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
