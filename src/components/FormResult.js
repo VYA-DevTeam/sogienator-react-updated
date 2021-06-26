@@ -4,25 +4,20 @@ import "./FormResult.css";
 import MobileDetect from "mobile-detect";
 import "react-tippy/dist/tippy.css";
 import { Tooltip } from "react-tippy";
+// import Result from "./pages/Result";
 import axios from "axios";
 // var md = new MobileDetect(window.navigator.userAgent);
 // console.log(md);
 
-const FormResult = () => {
-  // const { choice } = props;
+const FormResult = (props) => {
+  const result = props;
   const url = "https://vya-sogienator.herokuapp.com/feedback-question";
-
+  // const { history } = props;
+  // getResult();
   useEffect(() => {
-    // console.log(history);
+    console.log(result);
   }, []);
 
-  const toTitleCase = (phrase) => {
-    return phrase
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
   let device = "";
   var md = new MobileDetect(window.navigator.userAgent);
   if (md.phone() != null) device = "Phone";
@@ -36,17 +31,19 @@ const FormResult = () => {
     age: "",
     additional: "",
     device: device,
+    result: result.result,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  // let [bgColor, setBgColor] = useState({
+  //   bgColor: "#fff2f8",
+  // });
+  // const [checkClicked, setCheckClicked] = useState(false);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  //  console.log(location.state.answerGeneral)
-
-  // const feedback = (param) =>
-  //   customAxios.post("result", param).then((res) => res.data);
 
   function checkType() {
     if (
@@ -67,6 +64,7 @@ const FormResult = () => {
           age: data.age,
           additional: data.additional,
           device: data.device,
+          result: data.result,
         })
         .then((response) => {
           console.log(response.data);
@@ -78,20 +76,31 @@ const FormResult = () => {
   }
   function handleClick(e) {
     const newdata = { ...data };
+    // setCheckClicked(true);
+    // console.log (checkClicked);
     console.log("parent id:" + e.target.parentElement.id);
     console.log("id:" + e.target.id);
-    if (e.target.parentElement.id !== "additional"){
-    newdata[e.target.parentElement.id] = e.target.id;}
-    else {newdata[e.target.parentElement.id] = e.target.value;}
+    // e.target.classList[2] = "forcus-back";
+    console.log(e.target.style.backgroundColor);
+    let bgColor2 = "#c3126b";
+    let bgColor = "#ffd2da";
+
+    // setBgColor(bgColor2);
+    console.log("focus: "+ bgColor2);
+    console.log("normal: "+ bgColor);
+
+    // e.target.style.backgroundColor = checkClicked? bgColor:bgColor2;
+    // console.log(e.target.style.backgroundColor);
+
+    if (e.target.parentElement.id !== "additional") {
+      newdata[e.target.parentElement.id] = e.target.id;
+    } else {
+      newdata[e.target.parentElement.id] = e.target.value;
+    }
     setData(newdata);
     console.log(data);
   }
 
-  // function getAdditionalValue(e) {
-  //   console.log("parent id:" + e.target.parentElement.id);
-  //   console.log(e);
-  //   data.additional = e.target.value;
-  // }
   return (
     <div className="form-container">
       <div className="d-flex flex-column">
@@ -187,14 +196,7 @@ const FormResult = () => {
                   </div>
                 </div>
               </div>
-              {/* 
-              <div className="fb-content fb-tooltip px-4 pb-3 text-center">
-                Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
-              </div> */}
-              <div
-                className="first-q"
-                // onClick={handleClick()}
-              >
+              <div className="first-q">
                 <div className="fb-content px-2 pt-3 text-center">
                   Tuổi của bạn{" "}
                 </div>
@@ -218,12 +220,8 @@ const FormResult = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="fb-content fb-tooltip px-4 pb-3 text-center">
-                Sogienator đã tính toán đúng một phần nhưng chưa đầy đủ
-              </div> */}
               <div
                 className="first-q"
-                // onClick={handleClick()}
                 onChange={(e) => handleClick(e)}
                 id="additional"
                 value={data.additional}

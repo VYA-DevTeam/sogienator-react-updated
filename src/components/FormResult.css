@@ -50,7 +50,7 @@
   border:none;
 }
 .fb-card-header {
-  /* color: #393267; */
+  color: #393267;
   background-color: #ffcfe9;
   font-weight: 800;
   /* max-width: 300px; */
@@ -69,6 +69,8 @@
   width: 400px;
   position: absolute;
   overflow: scroll;
+  scrollbar-color: dark;
+  scrollbar-width: 10px;
 }
 .fb-content {
   font-weight: 800;
@@ -82,7 +84,7 @@
 }
 .list-feedback-item {
   color: black;
-  background-color: #fff2f8 !important;
+  background-color: #fff2f8;
   /* border-radius: 40px; */
   margin-left: 10px;
   display: flex;
@@ -95,7 +97,7 @@
 .list-feedback-item:last-of-type {
   border-radius: 0px 0px 20px 20px;
 }
-/* .list-feedback-item:active {
+/* .list-feedback-item :focus {
   background-color: #FFD2DA !important;
 } */
 .fb-tooltip {
@@ -110,6 +112,7 @@
   background-color: #ffd2da !important;
   border: none;
   width: 300px;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   /* padding-right: 100px; */
 }
 .fb-btn {
@@ -126,7 +129,7 @@
 /* .first-q {
 } */
 .first-q *.list-feedback-item:active {
-  background-color: #c3126b;
+  background-color: #e04794;
 }
 ::-webkit-scrollbar{
   width: 10px;
@@ -143,6 +146,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #c3126b;
 }
+/* Firefox */
 
 @media (min-width: 768px) and (max-width: 1080px) {
   .fb-form {
