@@ -111,8 +111,7 @@ function Result(props) {
         </div>
       </div>
       <FormResult
-        choiceID={history.location.state.choiceID}
-        choiceType={history.location.state.answerType}
+        result={result}
       ></FormResult>
       <Footer></Footer>
     </div>
