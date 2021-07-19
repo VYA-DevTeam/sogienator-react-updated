@@ -37,8 +37,9 @@ function Result(props) {
           },
         })
         .then(function (response) {
-          console.log(response.data[0].value);
-          setResult(toTitleCase(response.data[0].value));
+          // em tạm cmt ở đây nha do bên api chưa sửa giá trị nên nếu chạy 3 dòng dưới sẽ lỗi
+          //console.log(response.data[0].value);
+          //setResult(toTitleCase(response.data[0].value));
           // console.log(result);
         });
     } else {
