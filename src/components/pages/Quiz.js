@@ -1,18 +1,21 @@
 import React,{useState,useEffect} from "react";
 import Footer from "../Footer";
 import Header from "../Header";
-import QuizForm from "../QuizForm";
 import Loading from '../Loading';
-import {Link} from 'react-router-dom'
+import QuizItem from '../QuizItem'
+import { Container, Button } from 'react-bootstrap';
+import "../quizForm.css";
+
 import {
     getApiClient
 } from "../../client/api";
+
 export default function QuizPage({history,match}){
     const [questions,setQuestions] = useState([]);
-    const [answerGeneral,setAnswerGeneral] = useState(new Array(19).fill(0));
-    const [answerSpecific,setAnswerSpecific] = useState(new Array(22).fill(0));
+    const [chooseId,setChooseId] = useState(null);
+    const [answerGeneral,setAnswerGeneral] = useState([]);
+    const [answerSpecific,setAnswerSpecific] = useState([]);
     const [chooseQuestion, setChooseQuestion] = useState(0);
-    const [offset,setOffset] = useState(0);
     const [isLoading,setLoading] = useState(true);
     const [answerType, setAnswerType] = useState("general")
     const [answerID, setAnswerID] = useState()
@@ -30,24 +33,24 @@ export default function QuizPage({history,match}){
                 question: "Bạn có muốn tìm hiểu  về 1 trong những điều nào sau đây",
                 type:"Switch"
             }
+            console.log(response.data); 
             response.data.push(nextGeneral);
             setQuestions(response.data.sort((a,b)=> a.id-b.id));
             setLoading(false);
         }
     }
-    //Fix lại việc get câu hỏi (get câu hỏi bị sai)
-  
-    const handleChooseQuestion = async  (chooseId,setChooseId) => {
-        if(chooseId == null) {
-            alert("Bạn nên chọn đáp án trước");
-            return;
+    const handleSetAnswers = (answersUser) => {
+        if(questions[chooseQuestion].type.includes("specific")) {
+           setAnswerSpecific([...answerSpecific,answersUser])
+        }else {
+           setAnswerGeneral([...answerGeneral,answersUser]);
         }
-        if (chooseQuestion === questions.length - 1 && questions[chooseQuestion].type === "Switch") {
+    }
+    const handleChooseNextQuestion = async ()=> {
             setLoading(true)
             if (chooseId <=2 ) {
                 const response =  await getApiClient().getQuestionByType(fetchObject[chooseId]);
                 if(response.status === 200) {
-                    
                     setQuestions([...questions, ...response.data.sort((a, b) => a.id - b.id)])
                 }
             }if (chooseId == 2) {
@@ -57,8 +60,7 @@ export default function QuizPage({history,match}){
                     setQuestions([...questions, ...resEmo.data.sort((a, b) => a.id - b.id), ...resSex.data.sort((a,b)=>a.id-b.id)])
                 }
             }
-            // reset off set;
-            setOffset(0);
+            
             setLoading(false)
             setQuestions(questions => questions.filter(el => el.type !== "Switch"))
             if (chooseId == 3) {
@@ -76,24 +78,26 @@ export default function QuizPage({history,match}){
                     }
                 })
             }
+    }
+    
+    const handleChooseQuestion = async  () => {
+        if(chooseId == null) {
+            alert("Bạn nên chọn đáp án trước");
             return;
         }
-        
-        let trueIdx = parseInt(chooseId) + offset
+        if (chooseQuestion === questions.length - 1 && questions[chooseQuestion].type === "Switch") {
+            await handleChooseNextQuestion(chooseId);
+            return;
+        }
+    
         // check type question is specific;
             // Set index answer +1
             // update State Answer
-        if(questions[chooseQuestion].type.includes("specific")) {
-            let newAnswerSpecific = [...answerSpecific];
-            newAnswerSpecific[trueIdx] = 1;
-            setAnswerSpecific((_) => [...newAnswerSpecific])
-        }else {
-            let newAnswerGeneral = [...answerGeneral];
-            newAnswerGeneral[trueIdx] = 1;
-            setAnswerGeneral((_) => [...newAnswerGeneral]);
+        const answerUser =  {
+            quesId: questions[chooseQuestion].id,
+            chooseId: parseInt(chooseId)
         }
-        // update offset 
-        setOffset((prevState) => questions[chooseQuestion].choices.length + prevState);
+        handleSetAnswers(answerUser)
         // Set Choose Id to Null
         setChooseId(null);
         // Move Page if end question 
@@ -117,11 +121,10 @@ export default function QuizPage({history,match}){
             })
             return;
         }
-        
         // Increase Question
         setChooseQuestion(chooseQuestion + 1);
     }
-    
+ 
     useEffect(() => {
         handleFetchQuestion();
     }, [])
@@ -142,11 +145,50 @@ export default function QuizPage({history,match}){
                 isLoading ? <Loading></Loading> :
                 <>
                     <Header></Header>
-                    <QuizForm 
-                    
-                    handleChooseQuestion = {handleChooseQuestion} 
-                    chooseQuestion= {chooseQuestion}
-                    question={question}></QuizForm>
+                    <div>
+                        <Container fluid>
+                            <div className="form-container">
+                                <img
+                                    src="/images/explain-crop.png"
+                                    className="img-fluid test-img px-3 mx-auto d-block"
+                                    alt="welcome-mascot"
+                                />
+                                <div className="quiz-item">
+                                    <div className="quiz-item-title">
+                                        <div className="quiz-item-numques">
+                                            <p className="quiz-item-numques-num">{chooseQuestion + 1}</p>
+                                        </div>
+                                        <p className="quiz-item-ques">{question.question || ""}</p>
+                                    </div>
+                                    <div className='quiz-item-ansTitle'>
+                                        <p>CHỌN CÂU TRẢ LỜI</p>
+                                    </div>
+                                    <div className="quiz-item-breakLine"></div>
+                                    <div className="quiz-item-box">
+                                        {
+                                        question.choices.map((choice,idx) => {
+                                                return (<QuizItem 
+                                                setChooseId= {setChooseId}
+                                                checkClicked={chooseId==idx}
+                                                key = {
+                                                    idx
+                                                } >
+                                                    <p key={idx}>{choice}</p>
+                                                </QuizItem>
+                                                )})
+                                        }
+                                        
+                                    </div>
+                                    <div className="quiz-item-nextBtn">
+                                        <p className="quiz-item-note">*xyx: chú thích ở đây</p>
+                                        <Button
+                                            onClick={() => handleChooseQuestion()}
+                                            className="quiz-item-btn"><span>Tiếp</span></Button>{' '}
+                                    </div>
+                                </div>
+                            </div>
+                        </Container>
+                    </div>
                     <Footer/>
                 </>
             }
