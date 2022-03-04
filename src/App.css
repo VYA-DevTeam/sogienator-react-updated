@@ -1,24 +1,23 @@
 .home,
 .test,
-.result
-{
+.result {
   display: flex;
   flex-direction: column;
   height: 90vh;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
-  background-color: #FFF2F8;
-  color: #54424B;
+  background-color: #fff2f8;
+  color: #54424b;
   overflow-x: hidden;
 }
 
-.test {
+/* .test {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 70px;
-}
+} */
 
 .result {
   /* background-image: url('./images/Wow.png'); */
@@ -30,9 +29,9 @@
   font-size: 30px;
 }
 
-.form-container{
+.form-container {
   /* padding-top: 100px !important; */
-  border-color: #C3126B;
+  /* border-color: #C3126B; */
   margin: 10px;
   padding-left: 5% !important;
   padding-right: 5% !important;
