@@ -4,11 +4,9 @@ import "./quizForm.css";
 import "./../App.css";
 import QuizItem from "./QuizItem";
 export default function QuizForm({
-  question,
-  handleChooseQuestion,
-  chooseQuestion,
+  onChoiceSelected,
+  question
 }) {
-  const [chooseId, setChooseId] = useState(null);
   return (
     <div>
       <Container fluid="lg">
@@ -33,13 +31,9 @@ export default function QuizForm({
               <div className="quiz-item-box">
                 {question.choices.map((choice, idx) => {
                   return (
-                    <QuizItem
-                      setChooseId={setChooseId}
-                      checkClicked={chooseId == idx}
-                      key={idx}
-                    >
-                      <p key={idx}>{choice}</p>
-                    </QuizItem>
+                    <div className={`${checkClicked ? 'checked-click' : 'quiz-item-box-child'}`} onClick={() => setChooseId(children.key)} value={children.key}>
+                        {children}
+                    </div>
                   );
                 })}
               </div>

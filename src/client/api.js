@@ -1,6 +1,6 @@
 import axios from "axios"
 class apiClient {
-    BASE_URL = 'https://vya-sogienator.herokuapp.com/';
+    BASE_URL = 'https://vya-api.herokuapp.com/';
     apiClient() {
     }
 
@@ -9,7 +9,7 @@ class apiClient {
             type,
         }
 
-        const response = await axios.get(this.BASE_URL + "/questions", { params })
+        const response = await axios.get(this.BASE_URL + "/general-questions")
         return response;
     }
 }

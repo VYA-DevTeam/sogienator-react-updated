@@ -24,7 +24,7 @@ export default function QuizPage({ history, match }) {
   useEffect(() => console.log(answerSpecific), [answerSpecific]);
 
   const handleFetchQuestion = async () => {
-    const response = await getApiClient().getQuestionByType("general");
+    const response = await getApiClient().getQuestionByType();
     if (response.status === 200) {
       let nextGeneral = {
         choices: ["Xu Hướng Tình Cảm", "Xu Hướng Tính Dục", "Cả 2", "Không"],
