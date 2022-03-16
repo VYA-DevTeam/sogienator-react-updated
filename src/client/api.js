@@ -1,15 +1,11 @@
 import axios from "axios"
 class apiClient {
-    BASE_URL = 'https://vya-sogienator.herokuapp.com/';
+    BASE_URL = 'https://vya-api.herokuapp.com/';
     apiClient() {
     }
 
     async getQuestionByType(type) {
-        const params = {
-            type,
-        }
-
-        const response = await axios.get(this.BASE_URL + "/questions", { params })
+        const response = await axios.get(this.BASE_URL + type + '-questions')
         return response;
     }
 }

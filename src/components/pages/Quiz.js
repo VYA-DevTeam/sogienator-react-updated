@@ -32,12 +32,12 @@ export default function QuizPage({history,match}){
             }
             response.data.push(nextGeneral);
             setQuestions(response.data.sort((a,b)=> a.id-b.id));
+            console.log(response.data);
             setLoading(false);
         }
     }
-    //Fix lại việc get câu hỏi (get câu hỏi bị sai)
   
-    const handleChooseQuestion = async  (chooseId,setChooseId) => {
+    const handleChooseQuestion = async (chooseId,setChooseId) => {
         if(chooseId == null) {
             alert("Bạn nên chọn đáp án trước");
             return;
@@ -143,10 +143,10 @@ export default function QuizPage({history,match}){
                 <>
                     <Header></Header>
                     <QuizForm 
-                    
-                    handleChooseQuestion = {handleChooseQuestion} 
-                    chooseQuestion= {chooseQuestion}
-                    question={question}></QuizForm>
+                        handleChooseQuestion = {handleChooseQuestion} 
+                        chooseQuestion= {chooseQuestion}
+                        question={question}
+                    ></QuizForm>
                     <Footer/>
                 </>
             }
