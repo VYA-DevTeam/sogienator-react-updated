@@ -1,12 +1,9 @@
-import React, {
-    useState,
-    useEffect
-} from "react";
+import React, {useState} from "react";
 import { Container, Button } from 'react-bootstrap';
 import "./quizForm.css";
 import "./../App.css";
 import QuizItem from './QuizItem';
-export default function QuizForm({question,handleChooseQuestion,chooseQuestion}) {
+export default function QuizForm({question, handleChooseQuestion, chooseQuestion}) {
     const [chooseId,setChooseId] = useState(null);
     return (
         <div>
@@ -30,23 +27,25 @@ export default function QuizForm({question,handleChooseQuestion,chooseQuestion})
                         <div className="quiz-item-breakLine"></div>
                         <div className="quiz-item-box">
                             {
-                             question.choices.map((choice,idx) => {
-                                    return (<QuizItem 
-                                    setChooseId= {setChooseId}
-                                    checkClicked={chooseId==idx}
-                                     key = {
-                                        idx
-                                    } >
-                                        <p key={idx}>{choice}</p>
-                                    </QuizItem>
-                                    )})
+                                question.choices.map((choice,idx) => {
+                                    return (
+                                        <QuizItem 
+                                            setChooseId= {setChooseId}
+                                            checkClicked={chooseId==idx}
+                                            key = {
+                                                idx
+                                            }
+                                        >
+                                        <p key={idx}>{choice.value}</p>
+                                        </QuizItem>
+                                    )
+                                })
                             }
-                            
                         </div>
                         <div className="quiz-item-nextBtn">
                             <p className="quiz-item-note">*xyx: chú thích ở đây</p>
                             <Button
-                                onClick={() => handleChooseQuestion(chooseId,setChooseId)}
+                                onClick={() => handleChooseQuestion(chooseId, setChooseId)}
                                 className="quiz-item-btn"><span>Tiếp</span></Button>{' '}
                         </div>
                     </div>
