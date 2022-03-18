@@ -1,19 +1,18 @@
-import axios from "axios"
+import axios from "axios";
 class apiClient {
-    BASE_URL = 'https://vya-api.herokuapp.com/';
-    apiClient() {
-    }
+  BASE_URL = "https://vya-api.herokuapp.com/";
+  apiClient() {}
 
-    async getQuestionByType(type) {
-        const params = {
-            type,
-        }
+  async getGeneralQuestions() {
+    // const params = {
+    //   type,
+    // };
 
-        const response = await axios.get(this.BASE_URL + "/general-questions")
-        return response;
-    }
+    const response = await axios.get(this.BASE_URL + "/general-questions");
+    return response;
+  }
 }
 
 export function getApiClient() {
-    return new apiClient();
+  return new apiClient();
 }

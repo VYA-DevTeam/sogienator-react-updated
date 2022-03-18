@@ -24,15 +24,16 @@ export default function QuizPage({ history, match }) {
   useEffect(() => console.log(answerSpecific), [answerSpecific]);
 
   const handleFetchQuestion = async () => {
-    const response = await getApiClient().getQuestionByType();
+    const response = await getApiClient().getGeneralQuestions();
+    console.log(response);
     if (response.status === 200) {
-      let nextGeneral = {
-        choices: ["Xu Hướng Tình Cảm", "Xu Hướng Tính Dục", "Cả 2", "Không"],
-        id: 222,
-        question: "Bạn có muốn tìm hiểu  về 1 trong những điều nào sau đây",
-        type: "Switch",
-      };
-      response.data.push(nextGeneral);
+      // let nextGeneral = {
+      //   choices: ["Xu Hướng Tình Cảm", "Xu Hướng Tính Dục", "Cả 2", "Không"],
+      //   id: 222,
+      //   question: "Bạn có muốn tìm hiểu  về 1 trong những điều nào sau đây",
+      //   type: "Switch",
+      // };
+      // response.data.push(nextGeneral);
       setQuestions(response.data.sort((a, b) => a.id - b.id));
       setLoading(false);
     }
@@ -52,7 +53,7 @@ export default function QuizPage({ history, match }) {
       setLoading(true);
       // choose anything but "Không"
       if (chooseId < 2) {
-        const response = await getApiClient().getQuestionByType(
+        const response = await getApiClient().getGeneralQuestions(
           fetchObject[chooseId]
         );
         if (response.status === 200) {
@@ -63,8 +64,8 @@ export default function QuizPage({ history, match }) {
         }
       }
       if (chooseId == 2) {
-        const resEmo = await getApiClient().getQuestionByType(fetchObject[0]);
-        const resSex = await getApiClient().getQuestionByType(fetchObject[1]);
+        const resEmo = await getApiClient().getGeneralQuestions(fetchObject[0]);
+        const resSex = await getApiClient().getGeneralQuestions(fetchObject[1]);
         if (resEmo.status === 200 && resSex.status === 200) {
           setQuestions([
             ...questions,
@@ -147,6 +148,7 @@ export default function QuizPage({ history, match }) {
     handleFetchQuestion();
   }, []);
   const question = questions[chooseQuestion];
+
   const convertToDecimal = (arr) => {
     // convert to string
     //arr = [...answerGeneral,...answerSpecific]
@@ -168,7 +170,6 @@ export default function QuizPage({ history, match }) {
           <Header></Header>
           <QuizForm
             handleChooseQuestion={handleChooseQuestion}
-            chooseQuestion={chooseQuestion}
             question={question}
           ></QuizForm>
           <Footer />
