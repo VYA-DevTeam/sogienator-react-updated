@@ -1,12 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
-import "./quizForm.css";
-import "./../App.css";
-import QuizItem from "./QuizItem";
+import React, { useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import useWindowDimensions from "../hooks/use-window-dimension";
-export default function QuizForm({ onChoiceSelected, question }) {
-  const [chosenChoiceIdx, setChosenChoiceIdx] = useState(null);
+import "./../App.css";
+import "./quizForm.css";
+export default function QuizForm({ questions, onGoPrevious, ...props }) {
+  const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
+  const [choices, setChoices] = useState(new Array(questions.length).fill(0));
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
+
+  const handleGoPrevious = () => {
+    if (currentQuestion.id > 1)
+      setCurrentQuestion(questions[currentQuestion.id]);
+  };
+
+  const handleGoNext = () => {
+    if (currentQuestion.id < questions.length)
+      setCurrentQuestion(questions[currentQuestion.id]);
+  };
+
+  const handleSetChoice = (value) => {
+    choices[currentQuestion.id] = value;
+    setChoices([...choices]);
+  };
 
   return (
     <Container fluid="md">
@@ -40,12 +55,12 @@ export default function QuizForm({ onChoiceSelected, question }) {
             >
               <Col xs={3}>
                 <div className="quiz-item-circle">
-                  <p className="quiz-item-numques-num">{question.id}</p>
+                  <p className="quiz-item-numques-num">{currentQuestion.id}</p>
                 </div>
               </Col>
               <Col xs={8} md={9} lg={8}>
                 <span className="quiz-item-ques">
-                  {question.question || ""}
+                  {currentQuestion.question || ""}
                 </span>
               </Col>
             </Row>
@@ -62,33 +77,44 @@ export default function QuizForm({ onChoiceSelected, question }) {
               }}
               className="quiz-item-box"
             >
-              {question.choices.map((choice, idx) => {
+              {currentQuestion.choices.map((choice, idx) => {
                 return (
                   <Col
                     xs={12}
                     md={3}
                     lg={3}
                     className={`${
-                      chosenChoiceIdx === idx
-                        ? "checked-click"
-                        : "quiz-item-box-child"
+                      choices[currentQuestion.id] === idx
+                        ? "checked-click mr-2"
+                        : "quiz-item-box-child mr-2"
                     }`}
-                    onClick={() => setChosenChoiceIdx(idx)}
+                    onClick={() => handleSetChoice(choice.key)}
                     // value={children.key}
                   >
-                    <p key={idx}>{choice.value}</p>
+                    <p
+                      style={{
+                        fontSize:
+                          choice.value.length > 10 ? "0.9em" : "inherit",
+                      }}
+                      key={idx}
+                    >
+                      {choice.value}
+                    </p>
                   </Col>
                 );
               })}
             </Row>
-            <div className="quiz-item-nextBtn">
-              <p className="quiz-item-note">*xyx: chú thích ở đây</p>
+            <div className=" mr-3 quiz-item-actions">
+              {/* <p className="quiz-item-note">*xyx: chú thích ở đây</p> */}
               <Button
-                onClick={() => onChoiceSelected(chosenChoiceIdx)}
+                onClick={() => handleGoPrevious()}
                 className="quiz-item-btn"
               >
+                <span>Trước</span>
+              </Button>
+              <Button onClick={() => handleGoNext()} className="quiz-item-btn">
                 <span>Tiếp</span>
-              </Button>{" "}
+              </Button>
             </div>
           </div>
         </Col>
