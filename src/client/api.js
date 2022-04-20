@@ -4,11 +4,12 @@ class apiClient {
   apiClient() {}
 
   async getGeneralQuestions() {
-    // const params = {
-    //   type,
-    // };
-
     const response = await axios.get(this.BASE_URL + "/general-questions");
+    return response;
+  }
+
+  async getGeneralResult(key) {
+    const response = await axios.get(this.BASE_URL + `/result?key=${key}`);
     return response;
   }
 }

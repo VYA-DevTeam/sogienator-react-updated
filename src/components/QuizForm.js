@@ -3,14 +3,22 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import useWindowDimensions from "../hooks/use-window-dimension";
 import "./../App.css";
 import "./quizForm.css";
-export default function QuizForm({ questions, onGoPrevious, ...props }) {
+export default function QuizForm({
+  questions,
+  onGoPrevious,
+  onFinish,
+  ...props
+}) {
   const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
-  const [choices, setChoices] = useState(new Array(questions.length).fill(0));
+  const [choices, setChoices] = useState(new Array(questions.length).fill(-1));
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const handleGoPrevious = () => {
-    if (currentQuestion.id > 1)
-      setCurrentQuestion(questions[currentQuestion.id]);
+    console.log(currentQuestion.id > 1, currentQuestion, questions);
+    if (currentQuestion.id > 1) {
+      let newCurrentQuestion = questions[currentQuestion.id - 1];
+      setCurrentQuestion(newCurrentQuestion);
+    }
   };
 
   const handleGoNext = () => {
@@ -22,6 +30,14 @@ export default function QuizForm({ questions, onGoPrevious, ...props }) {
     choices[currentQuestion.id] = value;
     setChoices([...choices]);
   };
+
+  const handleFinish = () => {
+    onFinish();
+  };
+
+  useEffect(() => {
+    console.log("id", currentQuestion.id);
+  }, [currentQuestion]);
 
   return (
     <Container fluid="md">
@@ -106,15 +122,29 @@ export default function QuizForm({ questions, onGoPrevious, ...props }) {
             </Row>
             <div className=" mr-3 quiz-item-actions">
               {/* <p className="quiz-item-note">*xyx: chú thích ở đây</p> */}
-              <Button
-                onClick={() => handleGoPrevious()}
-                className="quiz-item-btn"
-              >
-                <span>Trước</span>
-              </Button>
-              <Button onClick={() => handleGoNext()} className="quiz-item-btn">
-                <span>Tiếp</span>
-              </Button>
+              {currentQuestion.id !== 1 && (
+                <Button
+                  onClick={() => handleGoPrevious()}
+                  className="quiz-item-btn"
+                >
+                  <span>Trước</span>
+                </Button>
+              )}
+              {currentQuestion.id !== questions.length ? (
+                <Button
+                  onClick={() => handleGoNext()}
+                  className="quiz-item-btn"
+                >
+                  <span>Tiếp</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => handleFinish()}
+                  className="quiz-item-btn"
+                >
+                  <span>Hoàn thành</span>
+                </Button>
+              )}
             </div>
           </div>
         </Col>
