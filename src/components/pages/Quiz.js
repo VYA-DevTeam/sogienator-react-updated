@@ -24,12 +24,12 @@ export default function QuizPage({ history, match }) {
     handleFetchQuestion();
   }, []);
 
-  const handleUpdateChoices = async (choices) => {
+  const handleFinishAndGetResult = async (choices) => {
     let key = choices.join("");
     console.log(key);
     let getResultRes = await apiClient.getGeneralResult(key);
     if (getResultRes?.status === 200) {
-      console.log("result", getResultRes);
+      window.open("/result");
     }
   };
   const convertToDecimal = (arr) => {
@@ -52,7 +52,7 @@ export default function QuizPage({ history, match }) {
         <>
           <Header></Header>
           <QuizForm
-            onFinish={(choices) => handleUpdateChoices(choices)}
+            onFinish={(choices) => handleFinishAndGetResult(choices)}
             questions={questions}
           ></QuizForm>
           <Footer />

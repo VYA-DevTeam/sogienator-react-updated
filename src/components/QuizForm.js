@@ -27,17 +27,17 @@ export default function QuizForm({
   };
 
   const handleSetChoice = (value) => {
-    choices[currentQuestion.id] = value;
+    choices[currentQuestion.id - 1] = value;
     setChoices([...choices]);
   };
 
   const handleFinish = () => {
-    onFinish();
+    onFinish(choices);
   };
 
   useEffect(() => {
-    console.log("id", currentQuestion.id);
-  }, [currentQuestion]);
+    console.log("choices", choices);
+  }, [choices]);
 
   return (
     <Container fluid="md">
@@ -100,7 +100,7 @@ export default function QuizForm({
                     md={3}
                     lg={3}
                     className={`${
-                      choices[currentQuestion.id] === idx
+                      choices[currentQuestion.id - 1] === idx
                         ? "checked-click mr-2"
                         : "quiz-item-box-child mr-2"
                     }`}
