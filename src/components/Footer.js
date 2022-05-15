@@ -24,43 +24,46 @@ function Footer() {
           <a
             href="https://vnyouthally.org/#vechungtoi-1"
             target="_blank"
+            rel="noreferrer"
             aria-label="About Us"
           >
             Về chúng mình
           </a>
         </div>
         <div className="contact">
-          <p className = "style-background">Theo dõi và liên hệ với chúng mình</p>
+          <p className="style-background">Theo dõi và liên hệ với chúng mình</p>
           <div className="social-icons">
             <a
               href="https://www.facebook.com/vietnamyouthalliance"
+              rel="noreferrer"
               target="_blank"
               aria-label="Facebook"
-              className = "style-background"
+              className="style-background"
             >
               <i className="fab fa-facebook-f style-background" />
             </a>
 
-            {/* <Link to="/" target="_blank" aria-label="Facebook"> 
+            {/* <Link to="/" target="_blank" aria-label="Facebook">
              </Link> */}
             <a
               href="https://www.instagram.com/vnyouthally/"
+              rel="noreferrer"
               target="_blank"
               aria-label="Instagram"
-              className = "style-background"
+              className="style-background"
             >
-            <i className="fab fa-instagram style-background" />
-            </a>
-          
-            <a
-              href="mailto:vietnam.youth.alliance@gmail.com"
-              target="_blank"
-              aria-label="Facebook"
-              className = "style-background"
-            >
-            <i className="fa fa-envelope style-background" />
+              <i className="fab fa-instagram style-background" />
             </a>
 
+            <a
+              href="mailto:vietnam.youth.alliance@gmail.com"
+              rel="noreferrer"
+              target="_blank"
+              aria-label="Facebook"
+              className="style-background"
+            >
+              <i className="fa fa-envelope style-background" />
+            </a>
           </div>
         </div>
         <div className="version">Phiên bản: Beta</div>
