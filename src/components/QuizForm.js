@@ -14,7 +14,6 @@ export default function QuizForm({
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const handleGoPrevious = () => {
-    console.log(currentQuestion.id > 1, currentQuestion, questions);
     if (currentQuestion.id > 1) {
       let newCurrentQuestion = questions[currentQuestion.id - 1];
       setCurrentQuestion(newCurrentQuestion);
@@ -35,9 +34,6 @@ export default function QuizForm({
     onFinish(choices);
   };
 
-  useEffect(() => {
-    console.log("choices", choices);
-  }, [choices]);
 
   return (
     <Container fluid="md">

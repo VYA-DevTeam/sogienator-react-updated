@@ -7,23 +7,19 @@ import { Tooltip } from "react-tippy";
 // import Result from "./pages/Result";
 import axios from "axios";
 // var md = new MobileDetect(window.navigator.userAgent);
-// console.log(md);
 
 const FormResult = (props) => {
   const result = props;
   const url = "https://vya-sogienator.herokuapp.com/feedback-question";
   // const { history } = props;
   // getResult();
-  useEffect(() => {
-    console.log(result);
-  }, []);
+
 
   let device = "";
   var md = new MobileDetect(window.navigator.userAgent);
   if (md.phone() != null) device = "Phone";
   else if (md.tablet() != null) device = "Tablet";
   else device = "Desktop";
-  // console.log(device);
 
   // const [result, setResult] = useState([]);
   const [data, setData] = useState({
@@ -67,30 +63,22 @@ const FormResult = (props) => {
           result: data.result,
         })
         .then((response) => {
-          console.log(response.data);
+
         });
       alert("Đã gửi");
-      console.log("Submmited");
     }
     return false;
   }
   function handleClick(e) {
     const newdata = { ...data };
     // setCheckClicked(true);
-    // console.log (checkClicked);
-    console.log("parent id:" + e.target.parentElement.id);
-    console.log("id:" + e.target.id);
     // e.target.classList[2] = "forcus-back";
-    console.log(e.target.style.backgroundColor);
     let bgColor2 = "#c3126b";
     let bgColor = "#ffd2da";
 
     // setBgColor(bgColor2);
-    console.log("focus: "+ bgColor2);
-    console.log("normal: "+ bgColor);
 
     // e.target.style.backgroundColor = checkClicked? bgColor:bgColor2;
-    // console.log(e.target.style.backgroundColor);
 
     if (e.target.parentElement.id !== "additional") {
       newdata[e.target.parentElement.id] = e.target.id;
@@ -98,7 +86,6 @@ const FormResult = (props) => {
       newdata[e.target.parentElement.id] = e.target.value;
     }
     setData(newdata);
-    console.log(data);
   }
 
   return (

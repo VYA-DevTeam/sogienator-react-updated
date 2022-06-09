@@ -26,7 +26,6 @@ function Result(props) {
     setIsLoading(true);
     let key = query.get("key");
     let resultRes = await apiClient.getResultByKey(key);
-    console.log(resultRes);
     if (resultRes?.status === 200) {
       let data = resultRes.data[0];
       setResult(data.value);
@@ -40,9 +39,7 @@ function Result(props) {
     //     },
     //   })
     //   .then(function (response) {
-    //     console.log(response.data[0].value);
     //     setResult(toTitleCase(response.data[0].value));
-    //     // console.log(result);
     //   });
     // let result = await;
   };
@@ -51,9 +48,6 @@ function Result(props) {
   useEffect(() => {
     getResult();
   }, []);
-  useEffect(() => {
-    console.log("result", result);
-  }, [result]);
 
   return isLoading ? (
     <Loading></Loading>

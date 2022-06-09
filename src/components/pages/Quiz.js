@@ -23,7 +23,6 @@ export default function QuizPage({ history, match }) {
   const handleFinishAndGetResult = async (choices) => {
     let key = choices.join("");
     let getResultRes = await apiClient.getGeneralResult(key);
-    console.log(getResultRes);
     if (getResultRes?.status === 200) {
       if (getResultRes?.data?.length)
         window.open(`/result?key=${getResultRes.data[0].key}`);
@@ -33,11 +32,7 @@ export default function QuizPage({ history, match }) {
   //   // convert to string
   //   //arr = [...answerGeneral,...answerSpecific]
   //   let answerArr = arr.join("");
-  //   console.log(`Mang ans o dang chuoi la ${answerArr}`);
   //   let answerDecimal = parseInt(answerArr, 2);
-  //   console.log(
-  //     `Sau khi chuyen sang he 10, mang ans tro thanh: ${answerDecimal}`
-  //   );
   //   return answerDecimal;
   // };
   // const user = convertToDecimal();
