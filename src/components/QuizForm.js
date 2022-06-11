@@ -14,7 +14,6 @@ export default function QuizForm({
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const handleGoPrevious = () => {
-    console.log(currentQuestion.id > 1, currentQuestion, questions);
     if (currentQuestion.id > 1) {
       let newCurrentQuestion = questions[currentQuestion.id - 1];
       setCurrentQuestion(newCurrentQuestion);
@@ -27,17 +26,14 @@ export default function QuizForm({
   };
 
   const handleSetChoice = (value) => {
-    choices[currentQuestion.id] = value;
+    choices[currentQuestion.id - 1] = value;
     setChoices([...choices]);
   };
 
   const handleFinish = () => {
-    onFinish();
+    onFinish(choices);
   };
 
-  useEffect(() => {
-    console.log("id", currentQuestion.id);
-  }, [currentQuestion]);
 
   return (
     <Container fluid="md">
@@ -100,7 +96,7 @@ export default function QuizForm({
                     md={3}
                     lg={3}
                     className={`${
-                      choices[currentQuestion.id] === idx
+                      choices[currentQuestion.id - 1] === idx
                         ? "checked-click mr-2"
                         : "quiz-item-box-child mr-2"
                     }`}

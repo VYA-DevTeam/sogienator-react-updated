@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Footer from "../Footer";
-import Header from "../Header";
 import axios from "axios";
-import Button from "../Button";
+import React, { useEffect, useState } from "react";
 import "react-tippy/dist/tippy.css";
-import { Tooltip } from "react-tippy";
-
-import "../../App.css";
+import { getApiClient } from "../../client/result";
 import FormResult from "../FormResult";
-
+import Header from "../Header";
+import Loading from "../Loading";
+import useQuery from "../../hooks/user-query";
 function Result(props) {
-  const { history } = props;
+  // const { history } = props;
+  const query = useQuery();
+  const apiClient = getApiClient();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [result, setResult] = useState([]);
@@ -23,58 +22,37 @@ function Result(props) {
       .join(" ");
   };
 
-  const getResult = () => {
-    let choiceID = history.location.state.choiceID;
-    let choiceType = history.location.state.answerType;
-    // console.log(choiceID, choiceType);
-    if (choiceType === "general") {
-      // console.log("g");
-      axios
-        .get("https://vya-sogienator.herokuapp.com/result", {
-          params: {
-            // key: 165904,
-            key: choiceID,
-          },
-        })
-        .then(function (response) {
-          console.log(response.data[0].value);
-          setResult(toTitleCase(response.data[0].value));
-          // console.log(result);
-        });
-    } else {
-      console.log("s");
-      axios
-        .get("https://vya-sogienator.herokuapp.com/specific-result", {
-          params: {
-            // key: 165904,
-            key: choiceID,
-          },
-        })
-        .then(function (response) {
-          if (response.data.length == 0) {
-            console.log(
-              "Not found result, data length: " + response.data.length
-            );
-            console.log(response);
-            setResult("Bán Vô Tính");
-          } else {
-            console.log(response.data.length);
-            console.log(response);
-            setResult("Bán Vô Tính");
-          }
-        });
+  const getResult = async () => {
+    setIsLoading(true);
+    let key = query.get("key");
+    let resultRes = await apiClient.getResultByKey(key);
+    if (resultRes?.status === 200) {
+      let data = resultRes.data[0];
+      setResult(data.value);
     }
+    setIsLoading(false);
+    // axios
+    //   .get("https://vya-sogienator.herokuapp.com/result", {
+    //     params: {
+    //       // key: 165904,
+    //       key: choiceID,
+    //     },
+    //   })
+    //   .then(function (response) {
+    //     setResult(toTitleCase(response.data[0].value));
+    //   });
+    // let result = await;
   };
   // getResult();
 
   useEffect(() => {
-    console.log(history.location.state);
-    console.log(history.location.state.choiceID);
-    console.log(getResult());
-  });
+    getResult();
+  }, []);
 
-  return (
-    <div>
+  return isLoading ? (
+    <Loading></Loading>
+  ) : (
+    <>
       <Header></Header>
       <div className="form-container">
         <div className="d-flex flex-column">
@@ -110,11 +88,8 @@ function Result(props) {
           </div>
         </div>
       </div>
-      <FormResult
-        result={result}
-      ></FormResult>
-      <Footer></Footer>
-    </div>
+      <FormResult result={result}></FormResult>
+    </>
   );
 }
 
