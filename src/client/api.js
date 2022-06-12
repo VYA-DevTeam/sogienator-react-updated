@@ -1,6 +1,6 @@
 import axios from "axios";
 class apiClient {
-  BASE_URL = "https://vya-api.herokuapp.com/";
+  BASE_URL = "https://vya-api.herokuapp.com";
   apiClient() {}
 
   async getGeneralQuestions() {

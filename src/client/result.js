@@ -1,19 +1,16 @@
-import axios from "axios"
+import axios from "axios";
 class apiClient {
-    BASE_URL = 'https://vya-sogienator.herokuapp.com/';
-    apiClient() {
-    }
+  BASE_URL = "https://vya-api.herokuapp.com";
 
-    async getResultbyValue(type) {
-        const params = {
-            type,
-        }
-
-        const response = await axios.get(this.BASE_URL + "/result", { params })
-        return response;
-    }
+  async getResultByKey(key) {
+    const params = {
+      key,
+    };
+    const response = await axios.get(this.BASE_URL + "/result", { params });
+    return await response;
+  }
 }
 
 export function getApiClient() {
-    return new apiClient();
+  return new apiClient();
 }

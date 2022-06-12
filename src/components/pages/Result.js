@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Footer from "../Footer";
-import Header from "../Header";
 import axios from "axios";
-import Button from "../Button";
+import React, { useEffect, useState } from "react";
 import "react-tippy/dist/tippy.css";
-import { Tooltip } from "react-tippy";
-
-import "../../App.css";
+import { getApiClient } from "../../client/result";
 import FormResult from "../FormResult";
-
+import Header from "../Header";
+import Loading from "../Loading";
+import useQuery from "../../hooks/user-query";
 function Result(props) {
-  const { history } = props;
+  // const { history } = props;
+  const query = useQuery();
+  const apiClient = getApiClient();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [result, setResult] = useState([]);
@@ -71,8 +70,10 @@ function Result(props) {
     console.log(history.location.state);
   });
 
-  return (
-    <div>
+  return isLoading ? (
+    <Loading></Loading>
+  ) : (
+    <>
       <Header></Header>
       <div className="form-container">
         <div className="d-flex flex-column">
@@ -108,11 +109,8 @@ function Result(props) {
           </div>
         </div>
       </div>
-      <FormResult
-        result={result}
-      ></FormResult>
-      <Footer></Footer>
-    </div>
+      <FormResult result={result}></FormResult>
+    </>
   );
 }
 
