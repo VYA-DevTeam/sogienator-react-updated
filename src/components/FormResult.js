@@ -18,6 +18,7 @@ const FormResult = (props) => {
     console.log(result);
   }, []);
 
+  
   let device = "";
   var md = new MobileDetect(window.navigator.userAgent);
   if (md.phone() != null) device = "Phone";
@@ -39,8 +40,7 @@ const FormResult = (props) => {
   //   bgColor: "#fff2f8",
   // });
   // const [checkClicked, setCheckClicked] = useState(false);
-
-
+  const [chosenColor, setChosenColor] = useState("");
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -53,6 +53,12 @@ const FormResult = (props) => {
     ) {
       return "mobile";
     } else return "tablet, laptop";
+  }
+
+  function choiceClicked() {
+    setChosenColor({
+      bgColor: "#c3126b"
+    });
   }
 
   function handleSubmit(e) {
@@ -76,6 +82,7 @@ const FormResult = (props) => {
   }
   function handleClick(e) {
     const newdata = { ...data };
+    console.log("newdata", newdata);
     // setCheckClicked(true);
     // console.log (checkClicked);
     console.log("parent id:" + e.target.parentElement.id);
@@ -86,8 +93,8 @@ const FormResult = (props) => {
     let bgColor = "#ffd2da";
 
     // setBgColor(bgColor2);
-    console.log("focus: "+ bgColor2);
-    console.log("normal: "+ bgColor);
+    console.log("focus: " + bgColor2);
+    console.log("normal: " + bgColor);
 
     // e.target.style.backgroundColor = checkClicked? bgColor:bgColor2;
     // console.log(e.target.style.backgroundColor);
@@ -120,7 +127,7 @@ const FormResult = (props) => {
               className="d-flex flex-column bd-highlight form-feedback"
               onSubmit={(e) => handleSubmit(e)}
             >
-              <div className="fb-content px-2 pt-3  text-center">
+              <div className="fb-content px-2 pt-3 text-center">
                 Trải nghiệm về kết quả
               </div>
               <div className="list-feedback px-3 pt-2 mr-1">
@@ -130,7 +137,7 @@ const FormResult = (props) => {
                   id="accuracy"
                   value={data.accuracy}
                 >
-                  <div className="p-3 bd-highlight list-feedback-item " id="1">
+                  <div className="p-3 bd-highlight list-feedback-item " id="1" style={{backgrounColor: chosenColor}} onClick={() => choiceClicked()}>
                     Không chính xác
                   </div>
                   <div className=" p-3 bd-highlight list-feedback-item " id="2">
