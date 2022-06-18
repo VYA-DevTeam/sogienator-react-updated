@@ -6,6 +6,7 @@ import FormResult from "../FormResult";
 import Header from "../Header";
 import Loading from "../Loading";
 import useQuery from "../../hooks/user-query";
+import { apiResponseStatus } from "../../client/constant";
 function Result(props) {
   // const { history } = props;
   const query = useQuery();
@@ -22,53 +23,35 @@ function Result(props) {
       .join(" ");
   };
 
-  // const getResult = () => {
-  //   let choiceID = history.location.state.choiceID;
-  //   let choiceType = history.location.state.answerType;
-  //   // console.log(choiceID, choiceType);
-  //   if (choiceType === "general") {
-  //     // console.log("g");
-  //     axios
-  //       .get("https://vya-sogienator.herokuapp.com/result", {
-  //         params: {
-  //           // key: 165904,
-  //           key: choiceID,
-  //         },
-  //       })
-  //       .then(function (response) {
-  //         console.log(response.data[0].value);
-  //         setResult(toTitleCase(response.data[0].value));
-  //         // console.log(result);
-  //       });
-  //   } else {
-  //     console.log("s");
-  //     axios
-  //       .get("https://vya-sogienator.herokuapp.com/specific-result", {
-  //         params: {
-  //           // key: 165904,
-  //           key: choiceID,
-  //         },
-  //       })
-  //       .then(function (response) {
-  //         if (response.data.length == 0) {
-  //           console.log(
-  //             "Not found result, data length: " + response.data.length
-  //           );
-  //           console.log(response);
-  //           setResult("Bán Vô Tính");
-  //         } else {
-  //           console.log(response.data.length);
-  //           console.log(response);
-  //           setResult("Bán Vô Tính");
-  //         }
-  //       });
-  //   }
-  // };
-  // getResult();
+  const getResult = async (key) => {
+    if (!key)
+      key = query.get("key");
+    if (!(parseInt(key) && !isNaN(key))) {
+      window.open("/");
+      return;
+    }
+    else {
+      key = parseInt(key);
+      let res = await apiClient.getResultByKey(key);
+      if (res?.status === apiResponseStatus.OK && res?.data?.length)
+      {
+        let result = res?.data[0];
+        setResult(result)
+      }
+    }
+  }
 
   useEffect(() => {
-    console.log(history.location.state);
-  });
+    setIsLoading(true);
+    console.log(document?.referrer)
+    if (!document?.referrer?.includes("/quiz"))
+    {
+      window.open("/");
+      return;
+    }
+    setIsLoading(false);
+    getResult();
+  },[]);
 
   return isLoading ? (
     <Loading></Loading>
@@ -105,7 +88,7 @@ function Result(props) {
               </Button> */}
             </div>
 
-            <div>{result && <div className="box-result">{result}</div>}</div>
+            <div>{result && <div className="box-result">{result.value}</div>}</div>
           </div>
         </div>
       </div>

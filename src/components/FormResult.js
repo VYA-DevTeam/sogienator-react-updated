@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import "./FormResult.css";
-import MobileDetect from "mobile-detect";
 import "react-tippy/dist/tippy.css";
 import { Tooltip } from "react-tippy";
 // import Result from "./pages/Result";
@@ -14,20 +13,19 @@ const FormResult = (props) => {
   // const { history } = props;
   // getResult();
 
-
-  
-  let device = "";
-  var md = new MobileDetect(window.navigator.userAgent);
-  if (md.phone() != null) device = "Phone";
-  else if (md.tablet() != null) device = "Tablet";
-  else device = "Desktop";
-
+  // const detectDevice  = () => {
+  //   let device = "";
+  //   var md = new MobileDetect(window.navigator.userAgent);
+  //   if (md.phone() != null) device = "Phone";
+  //   else if (md.tablet() != null) device = "Tablet";
+  //   else device = "Desktop";
+  // }
   // const [result, setResult] = useState([]);
   const [data, setData] = useState({
     accuracy: "",
     age: "",
     additional: "",
-    device: device,
+    device: checkType(),
     result: result.result,
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -84,8 +82,6 @@ const FormResult = (props) => {
     let bgColor = "#ffd2da";
 
     // setBgColor(bgColor2);
-    console.log("focus: " + bgColor2);
-    console.log("normal: " + bgColor);
 
 
     // e.target.style.backgroundColor = checkClicked? bgColor:bgColor2;

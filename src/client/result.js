@@ -7,7 +7,7 @@ class apiClient {
       key,
     };
     const response = await axios.get(this.BASE_URL + "/result", { params });
-    return await response;
+    return response;
   }
 }
 
