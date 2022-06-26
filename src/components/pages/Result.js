@@ -6,6 +6,7 @@ import FormResult from "../FormResult";
 import Header from "../Header";
 import Loading from "../Loading";
 import useQuery from "../../hooks/user-query";
+import FeedbackForm from "../FeedbackForm";
 function Result(props) {
   // const { history } = props;
   const query = useQuery();
@@ -66,9 +67,7 @@ function Result(props) {
   // };
   // getResult();
 
-  useEffect(() => {
-    console.log(history.location.state);
-  });
+
 
   return isLoading ? (
     <Loading></Loading>
@@ -110,6 +109,7 @@ function Result(props) {
         </div>
       </div>
       <FormResult result={result}></FormResult>
+      <FeedbackForm/>
     </>
   );
 }
