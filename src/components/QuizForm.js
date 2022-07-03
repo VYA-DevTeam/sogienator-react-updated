@@ -15,8 +15,7 @@ export default function QuizForm({
 
   const handleGoPrevious = () => {
     if (currentQuestion.id > 1) {
-      let newCurrentQuestion = questions[currentQuestion.id - 1];
-      setCurrentQuestion(newCurrentQuestion);
+      setCurrentQuestion(questions[currentQuestion.id-2]);
     }
   };
 

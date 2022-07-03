@@ -43,7 +43,6 @@ function Result(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(document?.referrer)
     if (!document?.referrer?.includes("/quiz"))
     {
       window.open("/");

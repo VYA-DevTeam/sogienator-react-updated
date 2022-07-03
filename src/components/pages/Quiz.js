@@ -24,8 +24,23 @@ export default function QuizPage({ history, match }) {
     let key = choices.join("");
     let getResultRes = await apiClient.getGeneralResult(key);
     if (getResultRes?.status === 200) {
-      if (getResultRes?.data?.length)
-        window.open(`/result?key=${getResultRes.data[0].key}`);
+      if (getResultRes?.data.roadmap) {
+        questions.push({
+          question:
+            "Bạn có muốn xác định rõ thêm cho xu hướng tình cảm & tình dục?",
+          choices: [
+            {
+              value: "có",
+              key: 0,
+            },
+            {
+              value: "không",
+              key: -1,
+            },
+          ],
+        });
+      } else if (getResultRes?.data?.result)
+        window.open(`/result?key=${getResultRes.data.key}`);
     }
   };
   // const convertToDecimal = (arr) => {
