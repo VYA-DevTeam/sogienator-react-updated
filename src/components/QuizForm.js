@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import useWindowDimensions from "../hooks/use-window-dimension";
 import "./../App.css";
+import Mascot from "./Mascot";
 import "./quizForm.css";
 export default function QuizForm({
   questions,
   onGoPrevious,
   onFinish,
+  generalResult,
   ...props
 }) {
   const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
   const [choices, setChoices] = useState(new Array(questions.length).fill(-1));
-  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const handleGoPrevious = () => {
     if (currentQuestion.id > 1) {
-      setCurrentQuestion(questions[currentQuestion.id-2]);
+      setCurrentQuestion(questions[currentQuestion.id - 2]);
     }
   };
 
@@ -33,30 +34,31 @@ export default function QuizForm({
     onFinish(choices);
   };
 
-
   return (
     <Container fluid="md">
       <Row>
         <Col xs={12} md={5}>
-          {windowWidth >= 800 ? (
-            <img
-              src="/images/explain.png"
-              style={{
-                maxWidth: 450,
-              }}
-              className="img-fluid mx-auto d-block"
-              alt="welcome-mascot"
-            />
-          ) : (
-            <img
-              src="/images/explain-crop.png"
-              style={{
-                maxWidth: 300,
-              }}
-              className="img-fluid mx-auto d-block"
-              alt="welcome-mascot"
-            />
+          {generalResult?.value && (
+            <>
+              <div
+                style={{
+                  fontSize: "25px",
+                  textAlign: "center",
+                }}
+              >
+                Kết quả của bạn là
+              </div>
+              <div
+                className="general-result"
+                style={{
+                  textTransform: "uppercase",
+                }}
+              >
+                {generalResult.value}
+              </div>
+            </>
           )}
+          <Mascot action={generalResult?.value ? "happy" : "explain"} />
         </Col>
         <Col>
           <div className="quiz-item">

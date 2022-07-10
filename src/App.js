@@ -3,10 +3,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./components/pages/Home";
+import Home from "./pages/Home";
 // import Test from "./components/pages/Test";
-import Result from "./components/pages/Result";
-import QuizPage from "./components/pages/Quiz";
+import Result from "./pages/Result";
+import QuizPage from "./pages/Quiz";
 
 function App() {
   return (

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getApiClient } from "../../client/api";
-import Header from "../Header";
-import Loading from "../Loading";
-import QuizForm from "../QuizForm";
+import { useLocation } from "react-router-dom";
+import { getApiClient } from "../client/api";
+import Header from "../components/Header";
+import Loading from "../components/Loading";
+import QuizForm from "../components/QuizForm";
 export default function QuizPage({ history, match }) {
   const apiClient = getApiClient();
   const [questions, setQuestions] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
+  const [generalResult, setGeneralResult] = useState("");
   const handleFetchQuestion = async () => {
     const response = await getApiClient().getGeneralQuestions();
     if (response.status === 200) {
@@ -16,29 +17,36 @@ export default function QuizPage({ history, match }) {
     }
   };
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
+    console.log(pathname);
     handleFetchQuestion();
   }, []);
 
   const handleFinishAndGetResult = async (choices) => {
     let key = choices.join("");
     let getResultRes = await apiClient.getGeneralResult(key);
+    let newQuestion = [];
     if (getResultRes?.status === 200) {
       if (getResultRes?.data.roadmap) {
-        questions.push({
-          question:
-            "Bạn có muốn xác định rõ thêm cho xu hướng tình cảm & tình dục?",
-          choices: [
-            {
-              value: "có",
-              key: 0,
-            },
-            {
-              value: "không",
-              key: -1,
-            },
-          ],
-        });
+        setGeneralResult(getResultRes?.data?.result[0]);
+        const newQuestion = [
+          {
+            question:
+              "Bạn có muốn xác định rõ thêm cho xu hướng tình cảm & tình dục?",
+            choices: [
+              {
+                value: "có",
+                key: 0,
+              },
+              {
+                value: "không",
+                key: -1,
+              },
+            ],
+          },
+        ];
       } else if (getResultRes?.data?.result)
         window.open(`/result?key=${getResultRes.data.key}`);
     }
@@ -61,6 +69,8 @@ export default function QuizPage({ history, match }) {
           <QuizForm
             onFinish={(choices) => handleFinishAndGetResult(choices)}
             questions={questions}
+            key={generalResult.value}
+            generalResult={generalResult}
           ></QuizForm>
         </>
       )}

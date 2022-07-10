@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "react-tippy/dist/tippy.css";
-import { getApiClient } from "../../client/result";
-import FormResult from "../FormResult";
-import Header from "../Header";
-import Loading from "../Loading";
-import useQuery from "../../hooks/user-query";
-import { apiResponseStatus } from "../../client/constant";
+import { getApiClient } from "../client/result";
+import FormResult from "../components/FormResult";
+import Header from "../components/Header";
+import Loading from "../components/Loading";
+import useQuery from "../hooks/user-query";
+import { apiResponseStatus } from "../client/constant";
 function Result(props) {
   // const { history } = props;
   const query = useQuery();
@@ -24,33 +24,29 @@ function Result(props) {
   };
 
   const getResult = async (key) => {
-    if (!key)
-      key = query.get("key");
+    if (!key) key = query.get("key");
     if (!(parseInt(key) && !isNaN(key))) {
       window.open("/");
       return;
-    }
-    else {
+    } else {
       key = parseInt(key);
       let res = await apiClient.getResultByKey(key);
-      if (res?.status === apiResponseStatus.OK && res?.data?.length)
-      {
+      if (res?.status === apiResponseStatus.OK && res?.data?.length) {
         let result = res?.data[0];
-        setResult(result)
+        setResult(result);
       }
     }
-  }
+  };
 
   useEffect(() => {
     setIsLoading(true);
-    if (!document?.referrer?.includes("/quiz"))
-    {
+    if (!document?.referrer?.includes("/quiz")) {
       window.open("/");
       return;
     }
     setIsLoading(false);
     getResult();
-  },[]);
+  }, []);
 
   return isLoading ? (
     <Loading></Loading>
@@ -87,7 +83,9 @@ function Result(props) {
               </Button> */}
             </div>
 
-            <div>{result && <div className="box-result">{result.value}</div>}</div>
+            <div>
+              {result && <div className="box-result">{result.value}</div>}
+            </div>
           </div>
         </div>
       </div>
