@@ -1,57 +1,35 @@
-import { Button, Paper, Typography } from "@material-ui/core";
-import { FormProvider, useForm } from "react-hook-form";
-import { FormInputText } from "./form-components/FormInputText";
-import { FormInputDropdown } from "./form-components/FormInputDropdown";
-
-interface IFormInput {
-  textValue: string;
-  radioValue: string;
-  checkboxValue: string[];
-  dateValue: Date;
-  dropdownValue: string;
-  sliderValue: number;
-}
-
-const defaultValues = {
-  textValue: "",
-  radioValue: "",
-  checkboxValue: [],
-  dateValue: new Date(),
-  dropdownValue: "",
-  sliderValue: 0,
-};
-export const FeedbackForm = () => {
-  const methods = useForm<IFormInput>({ defaultValues: defaultValues });
-  const { handleSubmit, control, setValue, watch } = methods;
-  const onSubmit = (data: IFormInput) => console.log(data);
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Header from "./Header";
+import './FeedbackForm.css';
+import { Container } from '@mui/material';
+export function FeedbackForm() {
+  const { register, handleSubmit } = useForm();
+  const [data, setData] = useState("");
 
   return (
-    <Paper
-      style={{
-        display: "grid",
-        gridRowGap: "20px",
-        padding: "20px",
-        margin: "10px 300px",
-      }}
-    >
-      <Typography variant="h6"> Form Feedback </Typography>
-
-      
-
-      <FormInputDropdown
-        name="dropdownValue"
-        control={control}
-        label="trải nghiệm về kết quả"
-      />
-      <p>Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An không?</p>
-      <FormInputText name="textValue" control={control} label="Câu trả lời của bạn" />
-      <Button onClick={handleSubmit(onSubmit)} variant={"contained"}>
-        {" "}
-        Submit{" "}
-      </Button>
-      
-    </Paper>
+    <Container maxWidth="sm">
+      <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
+        <select {...register("accuracy")}>
+          <option value="">Trải nghiệm của bạn</option>
+          <option value="1">Không chính xác</option>
+          <option value="2">Gần chính xác</option>
+          <option value="3">Chính xác</option>
+          <option value="4">Có kết quả nhưng cảm thấy không giống với bản thân</option>
+          <option value="5">Có kết quả và cảm thấy giống với bản thân</option>
+        </select>
+        <select {...register("age")}>
+          <option value="">Tuổi của bạn</option>
+          <option value="1">Dưới 15</option>
+          <option value="2">Trong độ tuổi từ 15 đến 20</option>
+          <option value="3">Trong độ tuổi từ 21 đến 30</option>
+          <option value="4">Trên 30</option>
+        </select>
+        <textarea {...register("additional")} placeholder="Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An không?" />
+        <p>{data}</p>
+        <input type="submit" />
+      </form>
+    </Container>
   );
-};
-
+}
 export default FeedbackForm;
