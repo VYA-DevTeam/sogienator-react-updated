@@ -3,12 +3,25 @@ import { useForm } from "react-hook-form";
 import Header from "./Header";
 import './FeedbackForm.css';
 import { Container } from '@mui/material';
-export function FeedbackForm() {
+import MobileDetect from "mobile-detect";
+
+export function FeedbackForm(props: any) {
+  const result = props;
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState("");
-
+  let device = "";
+  var md = new MobileDetect(window.navigator.userAgent);
+  if (md.phone() != null) device = "Phone";
+  else if (md.tablet() != null) device = "Tablet";
+  else device = "Desktop";
+  
   return (
     <Container maxWidth="sm">
+      <img
+            src="/images/wow.png"
+            className="px-3 fb-image"
+            alt="wow mascos"
+        />
       <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
         <select {...register("accuracy")}>
           <option value="">Trải nghiệm của bạn</option>
@@ -26,6 +39,8 @@ export function FeedbackForm() {
           <option value="4">Trên 30</option>
         </select>
         <textarea {...register("additional")} placeholder="Bạn còn điều gì muốn bày tỏ hoặc góp ý chi tiết thêm với Vy An không?" />
+        <textarea {...register("device")} value={device} style={{display: 'none'}}/> 
+        <textarea {...register("result")} value={result.result} style={{display: 'none'}}/>
         <p>{data}</p>
         <input type="submit" />
       </form>
