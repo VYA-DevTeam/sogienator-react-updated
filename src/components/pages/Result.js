@@ -104,12 +104,13 @@ function Result(props) {
               </Button> */}
             </div>
 
-            <div>{result && <div className="box-result">{result}</div>}</div>
+            <div>{result && <div className="box-result">vô tính</div>}</div>
           </div>
         </div>
       </div>
-      <FormResult result={result}></FormResult>
-      <FeedbackForm/>
+      <FeedbackForm
+        result={result}
+      />
     </>
   );
 }
